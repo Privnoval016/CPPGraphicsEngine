@@ -66,15 +66,15 @@ int main()
         auto amongUsTexture = TextureLoader::loadFromFile("Assets/Textures/AmongUs.png");
         
         auto amongUsMat = BuiltinMaterials::createStandard();
-        if (amongUsTexture) {
-            amongUsMat->setTexture("_MainTex", amongUsTexture);
-            amongUsMat->setInt("_UseMainTex", 1);  // Enable texture usage
-            std::cout << "✓ Texture applied to material" << std::endl;
-        } else {
+        // if (amongUsTexture) {
+        //     amongUsMat->setTexture("_MainTex", amongUsTexture);
+        //     amongUsMat->setInt("_UseMainTex", 1);  // Enable texture usage
+        //     std::cout << "✓ Texture applied to material" << std::endl;
+        // } else {
             // Fallback to solid color if texture fails
             std::cout << "Texture failed, using gold material instead" << std::endl;
             amongUsMat = MaterialSerializer::loadFromFile("Assets/Materials/gold.mat");
-        }
+        //}
         
         auto amongUs = s.findGameObject("AmongUs");
         if (amongUs && amongUsMat) {

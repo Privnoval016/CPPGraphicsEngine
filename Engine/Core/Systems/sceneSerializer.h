@@ -12,6 +12,8 @@
 #include <sstream>
 #include <iostream>
 
+// TODO : Finish serialization so it supports loading the actual monobehaviours
+
 /**
  * @class SceneSerializer
  * @brief Handles saving and loading scenes to/from files

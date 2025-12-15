@@ -49,10 +49,10 @@ public:
         // Movement
         vec3 velocity = vec3::zero;
 
-        if (input.getKey(SDL_SCANCODE_W)) velocity += forward();
-        if (input.getKey(SDL_SCANCODE_S)) velocity -= forward();
-        if (input.getKey(SDL_SCANCODE_A)) velocity += right();
-        if (input.getKey(SDL_SCANCODE_D)) velocity -= right();
+        if (input.getKey(SDL_SCANCODE_W)) velocity += transform().forward();
+        if (input.getKey(SDL_SCANCODE_S)) velocity -= transform().forward();
+        if (input.getKey(SDL_SCANCODE_A)) velocity += transform().right();
+        if (input.getKey(SDL_SCANCODE_D)) velocity -= transform().right();
         if (input.getKey(SDL_SCANCODE_SPACE)) velocity += vec3::up;
         if (input.getKey(SDL_SCANCODE_LSHIFT)) velocity -= vec3::up;
 
@@ -66,7 +66,7 @@ public:
                 speed *= sprintMultiplier;
             }
             
-            translate(velocity * speed * deltaTime);
+            transform().translate(velocity * speed * deltaTime);
         }
 
         // Look (always active for first-person feel)
@@ -100,7 +100,7 @@ public:
             float yawRad = std::atan2(lookDir.z, lookDir.x);
             float pitchRad = std::asin(lookDir.y);
             
-            setRotation(vec3(pitchRad, yawRad, 0));
+            transform().setWorldRotation(vec3(pitchRad, yawRad, 0));
         }
     }
 };

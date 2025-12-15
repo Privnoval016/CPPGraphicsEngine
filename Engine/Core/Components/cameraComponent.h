@@ -124,16 +124,97 @@ public:
     }
 
     // Convenience methods
-    vec3 screenToWorldPoint(const vec3& screenPoint) const
+    
+    /**
+     * @brief Convert screen coordinates to world space
+     * @param screenPoint Screen coordinates (x, y in pixels, z as depth 0-1)
+     * @param screenWidth Width of the viewport in pixels
+     * @param screenHeight Height of the viewport in pixels
+     * @return World space position
+     * 
+     * Screen coordinates: (0,0) is top-left, (width, height) is bottom-right
+     * Z coordinate: 0 = near plane, 1 = far plane
+     */
+    vec3 screenToWorldPoint(const vec3& screenPoint, float screenWidth, float screenHeight) const
     {
-        // TODO: Implement screen to world conversion
-        return screenPoint;
+        if (!camera) return vec3::zero;
+        
+        // Convert screen coordinates to normalized device coordinates (NDC)
+        // NDC range: x,y in [-1, 1], z in [0, 1]
+        float ndcX = (2.0f * screenPoint.x) / screenWidth - 1.0f;
+        float ndcY = 1.0f - (2.0f * screenPoint.y) / screenHeight;  // Flip Y (screen Y is top-down)
+        float ndcZ = screenPoint.z * 2.0f - 1.0f;  // Convert [0,1] to [-1,1]
+        
+        vec3 ndc(ndcX, ndcY, ndcZ);
+        
+        // Get inverse view-projection matrix
+        mat4 viewProj = camera->getViewProjectionMatrix();
+        mat4 invViewProj = viewProj.inverse();
+        
+        // Transform from clip space to world space
+        // Need to use homogeneous coordinates (w component)
+        float x = ndc.x;
+        float y = ndc.y;
+        float z = ndc.z;
+        float w = 1.0f;
+        
+        // Manually multiply by inverse matrix
+        float worldX = invViewProj.m[0][0] * x + invViewProj.m[0][1] * y + invViewProj.m[0][2] * z + invViewProj.m[0][3] * w;
+        float worldY = invViewProj.m[1][0] * x + invViewProj.m[1][1] * y + invViewProj.m[1][2] * z + invViewProj.m[1][3] * w;
+        float worldZ = invViewProj.m[2][0] * x + invViewProj.m[2][1] * y + invViewProj.m[2][2] * z + invViewProj.m[2][3] * w;
+        float worldW = invViewProj.m[3][0] * x + invViewProj.m[3][1] * y + invViewProj.m[3][2] * z + invViewProj.m[3][3] * w;
+        
+        // Perspective divide
+        if (std::abs(worldW) > 0.0001f) {
+            worldX /= worldW;
+            worldY /= worldW;
+            worldZ /= worldW;
+        }
+        
+        return vec3(worldX, worldY, worldZ);
     }
 
-    vec3 worldToScreenPoint(const vec3& worldPoint) const
+    /**
+     * @brief Convert world coordinates to screen space
+     * @param worldPoint World space position
+     * @param screenWidth Width of the viewport in pixels
+     * @param screenHeight Height of the viewport in pixels
+     * @return Screen coordinates (x, y in pixels, z as depth 0-1)
+     * 
+     * Screen coordinates: (0,0) is top-left, (width, height) is bottom-right
+     * Z coordinate: 0 = near plane, 1 = far plane
+     */
+    vec3 worldToScreenPoint(const vec3& worldPoint, float screenWidth, float screenHeight) const
     {
-        // TODO: Implement world to screen conversion
-        return worldPoint;
+        if (!camera) return vec3::zero;
+        
+        // Transform to clip space
+        mat4 viewProj = camera->getViewProjectionMatrix();
+        
+        // Manually multiply by view-projection matrix
+        float x = worldPoint.x;
+        float y = worldPoint.y;
+        float z = worldPoint.z;
+        float w = 1.0f;
+        
+        float clipX = viewProj.m[0][0] * x + viewProj.m[0][1] * y + viewProj.m[0][2] * z + viewProj.m[0][3] * w;
+        float clipY = viewProj.m[1][0] * x + viewProj.m[1][1] * y + viewProj.m[1][2] * z + viewProj.m[1][3] * w;
+        float clipZ = viewProj.m[2][0] * x + viewProj.m[2][1] * y + viewProj.m[2][2] * z + viewProj.m[2][3] * w;
+        float clipW = viewProj.m[3][0] * x + viewProj.m[3][1] * y + viewProj.m[3][2] * z + viewProj.m[3][3] * w;
+        
+        // Perspective divide
+        if (std::abs(clipW) > 0.0001f) {
+            clipX /= clipW;
+            clipY /= clipW;
+            clipZ /= clipW;
+        }
+        
+        // Convert from NDC [-1,1] to screen coordinates [0, width/height]
+        float screenX = (clipX + 1.0f) * 0.5f * screenWidth;
+        float screenY = (1.0f - clipY) * 0.5f * screenHeight;  // Flip Y (screen Y is top-down)
+        float screenZ = (clipZ + 1.0f) * 0.5f;  // Convert [-1,1] to [0,1]
+        
+        return vec3(screenX, screenY, screenZ);
     }
 };
 

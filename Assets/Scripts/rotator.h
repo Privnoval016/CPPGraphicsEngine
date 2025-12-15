@@ -27,7 +27,7 @@ public:
     void update(float deltaTime) override
     {
         // Rotate the object
-        rotate(rotationSpeed * deltaTime);
+        transform().rotate(rotationSpeed * deltaTime);
     }
 };
 
@@ -54,14 +54,14 @@ public:
 
     void start() override
     {
-        startPosition = position();
+        startPosition = transform().getWorldPosition();
     }
 
     void update(float deltaTime) override
     {
         timeAccum += deltaTime;
         float offset = std::sin(timeAccum * frequency * 2.0f * 3.14159f) * amplitude;
-        setPosition(startPosition + axis * offset);
+        transform().setWorldPosition(startPosition + axis * offset);
     }
 };
 
@@ -92,7 +92,7 @@ public:
         float x = center.x + radius * std::cos(angle);
         float z = center.z + radius * std::sin(angle);
         
-        setPosition(vec3(x, center.y, z));
+        transform().setWorldPosition(vec3(x, center.y, z));
     }
 };
 
