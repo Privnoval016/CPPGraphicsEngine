@@ -29,6 +29,8 @@ set(ENGINE_CORE
     Engine/Core/Components/monoBehaviour.h
     Engine/Core/Components/transformComponent.h
     Engine/Core/Components/cameraComponent.h
+    Engine/Core/Components/meshFilter.h
+    Engine/Core/Components/meshRenderer.h
     Engine/Core/Systems/input.h
     Engine/Core/Systems/sceneSerializer.h
     Engine/Core/gameObject.h
@@ -48,6 +50,9 @@ set(ENGINE_RENDERING
     Engine/Rendering/opengl_renderer.h
     Engine/Rendering/Shaders/shader.h
     Engine/Rendering/Shaders/default_shaders.h
+    Engine/Rendering/texture.h
+    Engine/Rendering/material.h
+    Engine/Rendering/builtin_materials.h
 )
 
 set(ENGINE_HEADERS
@@ -70,6 +75,15 @@ add_executable(Game
 )
 
 target_link_libraries(Game ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES})
+
+# Material demo executable
+add_executable(MaterialDemo
+    material_demo.cpp
+    ${ENGINE_HEADERS}
+    ${USER_SCRIPTS}
+)
+
+target_link_libraries(MaterialDemo ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES})
 
 # Set as default target
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Game)

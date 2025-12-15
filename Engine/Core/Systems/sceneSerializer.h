@@ -6,6 +6,8 @@
 #define ENGINE_SCENE_SERIALIZER_H
 
 #include "../scene.h"
+#include "../Components/meshFilter.h"
+#include "../Components/meshRenderer.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -55,9 +57,9 @@ public:
                  << rot.x() << " " << rot.y() << " " << rot.z() << " "
                  << scl.x() << " " << scl.y() << " " << scl.z() << "\n";
 
-            // Save mesh if exists
-            if (obj->hasMesh()) {
-                auto mesh = obj->getMesh();
+            // Save mesh if MeshFilter component exists
+            auto meshFilter = obj->getComponent<MeshFilter>();
+            if (meshFilter && meshFilter->hasMesh()) {
                 // For now, just save primitive type info
                 // In a full implementation, you'd save vertex/triangle data
                 file << "MESH primitive\n";
@@ -121,9 +123,10 @@ public:
             else if (token == "MESH" && currentObject) {
                 std::string meshType;
                 iss >> meshType;
-                // For now, create a default cube
+                // For now, create a default cube with MeshFilter/MeshRenderer
                 // In full implementation, load actual mesh data
-                currentObject->setMesh(Mesh::createCube());
+                currentObject->addComponent<MeshFilter>()->setMesh(Mesh::createCube());
+                currentObject->addComponent<MeshRenderer>();
             }
             else if (token == "ENDGO") {
                 currentObject = nullptr;

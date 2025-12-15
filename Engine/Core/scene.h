@@ -97,14 +97,9 @@ public:
     {
         framebuffer.clear(backgroundColor);
 
-        for (auto& obj : gameObjects)
-        {
-            if (obj->isActive() && obj->hasMesh())
-            {
-                mat4 modelMatrix = obj->transform.getModelMatrix();
-                rasterizer.drawMesh(framebuffer, *obj->mesh, modelMatrix, mainCamera, lights);
-            }
-        }
+        // Note: Software rasterizer rendering is deprecated
+        // Use OpenGL renderer instead (Engine::runOpenGL)
+        // This method kept for backwards compatibility
     }
 
     std::vector<GameObject*> getAllGameObjects() const

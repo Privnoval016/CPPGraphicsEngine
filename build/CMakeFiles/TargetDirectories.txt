@@ -1,3 +1,4 @@
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles/Game.dir
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles/MaterialDemo.dir
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles/edit_cache.dir
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles/rebuild_cache.dir

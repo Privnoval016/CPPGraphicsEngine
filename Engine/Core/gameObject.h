@@ -8,7 +8,6 @@
 #include "Components/component.h"
 #include "Components/behaviour.h"
 #include "Components/transformComponent.h"
-#include "../Rendering/Primitives/mesh.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -22,15 +21,11 @@ public:
     std::string name;
     TransformComponent transform;
     bool active;
-    
-    // Mesh rendering
-    std::shared_ptr<Mesh> mesh;
 
     GameObject(const std::string& objectName = "GameObject")
         : name(objectName),
           transform(),
-          active(true),
-          mesh(nullptr)
+          active(true)
     {
     }
 
@@ -78,6 +73,22 @@ public:
     }
 
     template<typename T>
+    const T* getComponent() const
+    {
+        static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
+        
+        std::type_index typeIdx(typeid(T));
+        auto it = componentMap.find(typeIdx);
+        
+        if (it != componentMap.end())
+        {
+            return static_cast<const T*>(it->second.get());
+        }
+        
+        return nullptr;
+    }
+
+    template<typename T>
     bool hasComponent()
     {
         return getComponent<T>() != nullptr;
@@ -107,22 +118,6 @@ public:
                 components.end()
             );
         }
-    }
-
-    // Mesh management
-    void setMesh(std::shared_ptr<Mesh> newMesh)
-    {
-        mesh = newMesh;
-    }
-
-    bool hasMesh() const
-    {
-        return mesh != nullptr;
-    }
-    
-    std::shared_ptr<Mesh> getMesh() const
-    {
-        return mesh;
     }
 
     // Lifecycle methods

@@ -1,319 +1,309 @@
-# Getting Started - 5 Minute Guide
+# Getting Started
 
-## Quick Start
+Quick guide to building and using the engine.
 
-### 1. Build the Engine (30 seconds)
+## Installation
+
+### Prerequisites
+
+- **C++ Compiler** - GCC 9+, Clang 10+, or MSVC 2019+
+- **CMake** - Version 3.10 or higher
+- **SDL2** - For window and input handling
+- **OpenGL** - Version 4.1 or higher (usually built-in on modern systems)
+
+### Install SDL2
+
+**macOS:**
+```bash
+brew install sdl2
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt install libsdl2-dev
+```
+
+**Windows:**
+Download SDL2 development libraries from [libsdl.org](https://www.libsdl.org/)
+
+### Build
 
 ```bash
-cd /path/to/CPPGraphicsEngine
+git clone <repo-url>
+cd CPPGraphicsEngine
 mkdir build && cd build
 cmake ..
 make
 ```
 
-### 2. Run the Demo (5 seconds)
+This creates two executables:
+- `Game` - Main demo (51 objects)
+- `MaterialDemo` - Material system showcase (19 objects)
 
-```bash
-./CPPGraphicsEngine > output.ppm
-```
+## Your First Project
 
-### 3. View the Result
+### 1. Create Your Game File
 
-```bash
-open output.ppm  # macOS
-eog output.ppm   # Linux
-start output.ppm # Windows
-```
-
-You should see a 3D scene with rotating cubes, an orbiting sphere, and lighting!
-
-## Your First Scene (5 minutes)
-
-Create `my_first_scene.cpp`:
+Create `my_game.cpp`:
 
 ```cpp
-#include "Core/gameEngine.h"
-#include "Core/scene.h"
-#include "Examples/rotator.h"
+#include "GraphicsEngine.h"
+#include "Assets/Scripts/cameraController.h"
 
 int main()
 {
-    // 1. Create engine (width, height)
-    GameEngine engine(640, 480);
+    // Create scene
+    Scene scene;
+    scene.name = "MyGame";
     
-    // 2. Create scene
-    Scene scene("My First Scene");
+    // Create camera
+    auto camera = scene.createGameObject("Camera");
+    camera->transform.setPosition(vec3(0, 5, 15));
+    camera->addComponent<CameraComponent>();
+    camera->addComponent<CameraController>();
     
-    // 3. Position camera
-    scene.mainCamera.position = vec3(0, 2, -6);
-    scene.mainCamera.lookAt(vec3(0, 0, 0));
+    // Create a spinning cube
+    auto cube = scene.createGameObject("Cube");
+    cube->transform.setPosition(vec3(0, 1, 0));
+    cube->addComponent<MeshFilter>()->setMesh(Mesh::createCube());
+    cube->addComponent<MeshRenderer>();
     
-    // 4. Add a light
-    Light sun = Light::directional(
-        vec3(0, -1, 0.5f),  // Direction
-        color(1, 1, 1),      // White light
-        1.0f                 // Full intensity
-    );
-    scene.addLight(sun);
-    
-    // 5. Create a spinning cube
-    GameObject* cube = scene.createGameObject("MyCube");
-    cube->setMesh(Mesh::createCube(2.0f));
-    
-    auto spinner = cube->addComponent<Rotator>();
-    spinner->rotationSpeed = vec3(0.5f, 1.0f, 0);
-    
-    // 6. Create ground
-    GameObject* ground = scene.createGameObject("Ground");
-    ground->setMesh(Mesh::createPlane(10.0f, 10.0f));
-    
-    // 7. Run!
-    engine.setActiveScene(&scene);
-    engine.run(1);  // 1 frame
-    engine.outputFrame();
+    // Run engine
+    Engine::runOpenGL(scene, 1280, 720, "My Game");
     
     return 0;
 }
 ```
 
-Build and run:
-```bash
-# Add to CMakeLists.txt:
-add_executable(my_scene my_first_scene.cpp)
+### 2. Add to Build System
 
-# Build
-cd build && make
+Edit `CMakeLists.txt`, add before the last line:
 
-# Run
-./my_scene > my_output.ppm
+```cmake
+# Your game
+add_executable(MyGame my_game.cpp)
+target_include_directories(MyGame PRIVATE ${CMAKE_SOURCE_DIR})
 ```
 
-## Create Your First Script (5 minutes)
+### 3. Build and Run
 
-Create `my_script.h`:
+```bash
+cd build
+make MyGame
+./MyGame
+```
+
+## Creating Custom Scripts
+
+### 1. Create Script File
+
+Create `Assets/Scripts/myScript.h`:
 
 ```cpp
 #ifndef MY_SCRIPT_H
 #define MY_SCRIPT_H
 
-#include "Core/monoBehaviour.h"
-#include <cmath>
+#include "Engine/Core/Components/monoBehaviour.h"
+#include "Engine/Core/Systems/input.h"
 
 class MyScript : public MonoBehaviour
 {
 public:
-    float speed = 2.0f;
-    float height = 1.0f;
+    float speed = 5.0f;
     
-private:
-    float time = 0.0f;
+    void start() override
+    {
+        // Called once before first update
+        std::cout << "MyScript started on " << gameObject->name << std::endl;
+    }
     
-public:
     void update(float deltaTime) override
     {
-        time += deltaTime;
+        // Move with WASD
+        vec3 movement(0, 0, 0);
         
-        // Bounce up and down
-        float y = height + std::sin(time * speed) * 0.5f;
-        setPosition(vec3(position().x(), y, position().z()));
+        if (Input::getKey(SDLK_w)) movement.z -= speed * deltaTime;
+        if (Input::getKey(SDLK_s)) movement.z += speed * deltaTime;
+        if (Input::getKey(SDLK_a)) movement.x -= speed * deltaTime;
+        if (Input::getKey(SDLK_d)) movement.x += speed * deltaTime;
         
-        // Spin
-        rotate(vec3(0, speed * deltaTime, 0));
+        gameObject->transform.translate(movement);
+        
+        // Jump
+        if (Input::getKeyDown(SDLK_SPACE)) {
+            std::cout << "Jump!" << std::endl;
+        }
     }
 };
 
 #endif
 ```
 
-Use it:
-```cpp
-#include "my_script.h"
+### 2. Use Your Script
 
-GameObject* obj = scene.createGameObject("BouncyCube");
-obj->setMesh(Mesh::createCube());
-auto script = obj->addComponent<MyScript>();
-script->speed = 3.0f;
-script->height = 2.0f;
+In your game file:
+
+```cpp
+#include "Assets/Scripts/myScript.h"
+
+// Add to GameObject
+auto player = scene.createGameObject("Player");
+player->addComponent<MyScript>();
 ```
 
-## Common Tasks
+## Using Materials
 
-### Change Camera Position
+Materials must be created **after** OpenGL initializes. Use the callback:
+
 ```cpp
-scene.mainCamera.position = vec3(x, y, z);
-scene.mainCamera.lookAt(vec3(0, 0, 0));
+Engine::runOpenGL(scene, 1280, 720, "Game", 60, 
+    [&](Scene& s) {
+        // Create materials here
+        auto redMaterial = BuiltinMaterials::createStandard();
+        redMaterial->setColor("_Color", color(1, 0, 0));
+        redMaterial->setFloat("_Metallic", 0.8f);
+        redMaterial->setFloat("_Smoothness", 0.9f);
+        
+        // Apply to object
+        cube->getComponent<MeshRenderer>()->setMaterial(redMaterial);
+    });
 ```
 
-### Add More Lights
-```cpp
-// Sun
-scene.addLight(Light::directional(vec3(0, -1, 0)));
+### Material Types
 
-// Lamp
-scene.addLight(Light::point(vec3(5, 5, 5), color(1, 0.8f, 0.6f), 1.0f, 20.0f));
+**Standard (PBR):**
+```cpp
+auto mat = BuiltinMaterials::createStandard();
+mat->setColor("_Color", color(r, g, b));
+mat->setFloat("_Metallic", 0.0f);      // 0=non-metal, 1=metal
+mat->setFloat("_Smoothness", 0.5f);    // 0=rough, 1=smooth
 ```
 
-### Create Objects
+**Unlit (no lighting):**
 ```cpp
-GameObject* obj = scene.createGameObject("MyObject");
-obj->setMesh(Mesh::createCube());     // Cube
-obj->setMesh(Mesh::createSphere());   // Sphere
-obj->setMesh(Mesh::createPlane());    // Plane
+auto mat = BuiltinMaterials::createUnlit();
+mat->setColor("_Color", color(r, g, b));
 ```
 
-### Position Objects
+**Standard Specular:**
 ```cpp
-obj->transform.position = vec3(1, 2, 3);
-obj->transform.rotation = vec3(0, 3.14f/4, 0);  // 45° rotation
-obj->transform.scale = vec3(2, 2, 2);           // 2x size
+auto mat = BuiltinMaterials::createStandardSpecular();
+mat->setColor("_Color", color(r, g, b));
+mat->setColor("_SpecColor", color(1, 1, 1));
+mat->setFloat("_Smoothness", 0.8f);
 ```
 
-### Add Behaviors
+## Scene Hierarchy
+
+Create parent-child relationships:
+
 ```cpp
-// Spin
-obj->addComponent<Rotator>()->rotationSpeed = vec3(0, 1, 0);
+auto parent = scene.createGameObject("Parent");
+auto child = scene.createGameObject("Child");
 
-// Bounce
-auto osc = obj->addComponent<Oscillator>();
-osc->amplitude = 2.0f;
-osc->frequency = 1.0f;
+child->transform.setParent(&parent->transform);
+child->transform.setLocalPosition(vec3(0, 2, 0));  // 2 units above parent
 
-// Orbit
-auto orb = obj->addComponent<Orbiter>();
-orb->center = vec3::zero;
-orb->radius = 5.0f;
-orb->speed = 1.0f;
+// Moving parent moves children
+parent->transform.translate(vec3(5, 0, 0));
 ```
 
-### Render Settings
+## Saving/Loading Scenes
+
 ```cpp
-// Wireframe
-engine.rasterizer.renderMode = Rasterizer::RenderMode::Wireframe;
+// Save
+SceneSerializer::saveToFile(scene, "Assets/Scenes/level1.scene");
 
-// Solid (default)
-engine.rasterizer.renderMode = Rasterizer::RenderMode::Solid;
-
-// Both
-engine.rasterizer.renderMode = Rasterizer::RenderMode::SolidWireframe;
+// Load
+Scene loaded = SceneSerializer::loadFromFile("Assets/Scenes/level1.scene");
+Engine::runOpenGL(loaded);
 ```
 
-### Save Output
+## Common Patterns
+
+### Access Components
+
 ```cpp
-engine.saveFrame("output.ppm");           // Save to file
-engine.outputFrame();                     // Print to stdout
-```
+// Get component (returns nullptr if not found)
+auto renderer = gameObject->getComponent<MeshRenderer>();
+if (renderer) {
+    renderer->setEnabled(false);
+}
 
-## Example Scenes
-
-### Scene 1: Solar System
-```cpp
-// Sun
-GameObject* sun = scene.createGameObject("Sun");
-sun->setMesh(Mesh::createSphere(1.5f));
-sun->addComponent<Rotator>()->rotationSpeed = vec3(0, 0.5f, 0);
-
-// Planet orbiting sun
-GameObject* planet = scene.createGameObject("Planet");
-planet->setMesh(Mesh::createSphere(0.5f));
-auto orbit = planet->addComponent<Orbiter>();
-orbit->center = vec3::zero;
-orbit->radius = 5.0f;
-orbit->speed = 1.0f;
-```
-
-### Scene 2: Bouncing Cubes
-```cpp
-for (int i = 0; i < 5; i++)
-{
-    GameObject* cube = scene.createGameObject("Cube" + std::to_string(i));
-    cube->setMesh(Mesh::createCube(0.8f));
-    cube->transform.position = vec3(i * 2.0f - 4.0f, 1, 0);
-    
-    auto osc = cube->addComponent<Oscillator>();
-    osc->frequency = 1.0f + i * 0.2f;
-    osc->amplitude = 1.5f;
+// Get from other objects
+auto player = scene.findGameObject("Player");
+if (player) {
+    auto script = player->getComponent<MyScript>();
 }
 ```
 
-### Scene 3: Spinning Tower
+### Find Objects
+
 ```cpp
-for (int i = 0; i < 8; i++)
-{
-    GameObject* cube = scene.createGameObject("Tower" + std::to_string(i));
-    cube->setMesh(Mesh::createCube(1.0f));
-    cube->transform.position = vec3(0, i * 1.2f, 0);
-    
-    auto rot = cube->addComponent<Rotator>();
-    rot->rotationSpeed = vec3(0, 1.0f + i * 0.3f, 0);
+// By name
+auto obj = scene.findGameObject("Player");
+
+// All objects
+for (auto* obj : scene.getAllGameObjects()) {
+    std::cout << obj->name << std::endl;
 }
 ```
 
-## Troubleshooting
+### Spawn Objects at Runtime
 
-### "Build failed"
-- Make sure C++20 is supported
-- Check CMake version (3.30+)
-- Verify all header files exist
+```cpp
+void MyScript::update(float deltaTime) {
+    if (Input::getKeyDown(SDLK_SPACE)) {
+        auto newObj = gameObject->scene->createGameObject("Spawned");
+        newObj->transform.setPosition(gameObject->transform.getPosition());
+        newObj->addComponent<MeshFilter>()->setMesh(Mesh::createCube());
+        newObj->addComponent<MeshRenderer>();
+    }
+}
+```
 
-### "Blank/black image"
-- Check camera position (not inside objects)
-- Verify objects are in view
-- Add lighting (scene needs lights!)
+### Frame-Rate Independent Movement
 
-### "Objects not visible"
-- Camera might be too far/close
-- Objects might be behind camera
-- Check object positions
+Always use `deltaTime` for smooth movement:
 
-### "Image looks wrong"
-- Verify normal calculations
-- Check light directions
-- Ensure depth buffering is working
+```cpp
+void update(float deltaTime) override {
+    float speed = 5.0f;
+    gameObject->transform.translate(vec3(0, 0, -speed * deltaTime));
+}
+```
+
+## Controls (Built-in CameraController)
+
+- **WASD** - Move forward/back/left/right
+- **Space** - Move up
+- **Shift** - Move down
+- **Mouse** - Look around
+- **Left Ctrl** - Sprint (move faster)
+- **ESC** - Exit application
 
 ## Next Steps
 
-1. ✅ **You just created your first 3D scene!**
-2. 📖 Read `QUICK_REFERENCE.md` for more API details
-3. 🎮 Check `examples_advanced.cpp` for complex scenes
-4. 🔧 Read `COMPONENT_GUIDE.md` to create custom scripts
-5. 🏗️ Read `ARCHITECTURE.md` to understand the internals
+- See [Architecture](ARCHITECTURE.md) for detailed system explanation
+- Check `main.cpp` and `material_demo.cpp` for complete examples
+- Create your own scripts in `Assets/Scripts/`
+- Experiment with materials and lighting
 
-## Quick Reference Card
+## Troubleshooting
 
-```cpp
-// Engine
-GameEngine engine(width, height);
-engine.setActiveScene(&scene);
-engine.run(numFrames);
+**"SDL2 not found"**
+- Make sure SDL2 is installed (`brew install sdl2` on macOS)
+- On Linux: `sudo apt install libsdl2-dev`
 
-// Scene
-Scene scene("Name");
-scene.mainCamera.position = vec3(x, y, z);
-scene.addLight(Light::directional(direction));
+**"No OpenGL context"**
+- Your system must support OpenGL 4.1+
+- Update graphics drivers
 
-// GameObject
-GameObject* obj = scene.createGameObject("Name");
-obj->setMesh(mesh);
-obj->transform.position = vec3(x, y, z);
-obj->addComponent<ComponentType>();
+**"Materials crash"**
+- Materials must be created in the `onOpenGLReady` callback
+- Don't create materials before `Engine::runOpenGL()` is called
 
-// Component
-class MyScript : public MonoBehaviour {
-    void update(float dt) override { }
-};
-
-// Math
-vec3 v(1, 2, 3);
-float dot = dot(v1, v2);
-vec3 cross = cross(v1, v2);
-mat4 m = mat4::translation(vec3(1, 0, 0));
-```
-
-## Community & Help
-
-- 📁 Check the `Examples/` folder for more scripts
-- 📖 Read the documentation files for detailed info
-- 🔍 Study `main.cpp` for a complete example
-- 🧪 Experiment! Change values and see what happens
-
-**Happy coding! You're now a graphics engine developer! 🎨🚀**
+**Objects not rendering**
+- Make sure GameObject has both `MeshFilter` and `MeshRenderer` components
+- Check that camera has `CameraComponent`
+- Verify objects are in camera's view frustum

@@ -6,12 +6,16 @@
 #ifndef GRAPHICS_ENGINE_H
 #define GRAPHICS_ENGINE_H
 
+#include <functional>
+
 // Core components
 #include "Engine/Core/Components/component.h"
 #include "Engine/Core/Components/behaviour.h"
 #include "Engine/Core/Components/monoBehaviour.h"
 #include "Engine/Core/Components/transformComponent.h"
 #include "Engine/Core/Components/cameraComponent.h"
+#include "Engine/Core/Components/meshFilter.h"
+#include "Engine/Core/Components/meshRenderer.h"
 #include "Engine/Core/gameObject.h"
 #include "Engine/Core/scene.h"
 #include "Engine/Core/Systems/sceneSerializer.h"
@@ -28,6 +32,9 @@
 #include "Engine/Rendering/camera.h"
 #include "Engine/Rendering/light.h"
 #include "Engine/Rendering/framebuffer.h"
+#include "Engine/Rendering/texture.h"
+#include "Engine/Rendering/material.h"
+#include "Engine/Rendering/builtin_materials.h"
 #include "Engine/Rendering/rasterizer.h"
 #include "Engine/Rendering/window.h"
 #include "Engine/Rendering/opengl_window.h"
@@ -78,9 +85,11 @@ namespace Engine
      * @param height Window height
      * @param title Window title
      * @param targetFPS Target FPS (0 = unlimited)
+     * @param onOpenGLReady Optional callback called after OpenGL context is ready (for creating materials/shaders)
      */
     inline void runOpenGL(Scene& scene, int width = 1280, int height = 720, 
-                         const std::string& title = "Graphics Engine", int targetFPS = 60)
+                         const std::string& title = "Graphics Engine", int targetFPS = 60,
+                         std::function<void(Scene&)> onOpenGLReady = nullptr)
     {
         OpenGLWindow window(width, height, title);
         if (!window.isOpen) {
@@ -92,6 +101,11 @@ namespace Engine
         if (!renderer.initialize()) {
             std::cerr << "Failed to initialize renderer!" << std::endl;
             return;
+        }
+
+        // Call onOpenGLReady callback AFTER OpenGL context is ready
+        if (onOpenGLReady) {
+            onOpenGLReady(scene);
         }
 
         // Call awake/start on all components
@@ -151,10 +165,19 @@ namespace Engine
 
             // Render all mesh objects
             for (auto* obj : scene.getAllGameObjects()) {
-                if (obj->getMesh()) {
+                auto meshRenderer = obj->getComponent<MeshRenderer>();
+                auto meshFilter = obj->getComponent<MeshFilter>();
+                
+                if (meshRenderer && meshFilter && meshRenderer->canRender()) {
                     mat4 transform = obj->transform.getModelMatrix();
                     if (camera) {
-                        renderer.drawMesh(*obj->getMesh(), transform, *camera, lights);
+                        renderer.drawMesh(
+                            *meshFilter->getMeshPtr(),
+                            meshRenderer->getMaterialPtr(),
+                            transform,
+                            *camera,
+                            lights
+                        );
                     }
                 }
             }

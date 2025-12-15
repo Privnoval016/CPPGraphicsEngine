@@ -68,12 +68,13 @@ private:
      * - Location 0: Position (vec3)
      * - Location 1: Normal (vec3)
      * - Location 2: Color (vec3)
+     * - Location 3: TexCoord (vec2)
      */
     void uploadMesh(const Mesh& mesh, MeshBuffer& buffer)
     {
-        // Prepare vertex data: position (3) + normal (3) + color (3) = 9 floats per vertex
+        // Prepare vertex data: position (3) + normal (3) + color (3) + uv (2) = 11 floats per vertex
         std::vector<float> vertices;
-        vertices.reserve(mesh.vertices.size() * 9);
+        vertices.reserve(mesh.vertices.size() * 11);
 
         for (const auto& v : mesh.vertices)
         {
@@ -89,6 +90,9 @@ private:
             vertices.push_back(v.vertexColor.x());
             vertices.push_back(v.vertexColor.y());
             vertices.push_back(v.vertexColor.z());
+            // UV (only x and y from vec3)
+            vertices.push_back(v.uv.x());
+            vertices.push_back(v.uv.y());
         }
 
         // Prepare index data (3 indices per triangle)
@@ -120,16 +124,20 @@ private:
 
         // Configure vertex attributes
         // Position attribute (location = 0)
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
 
         // Normal attribute (location = 1)
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
 
         // Color attribute (location = 2)
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(6 * sizeof(float)));
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(6 * sizeof(float)));
         glEnableVertexAttribArray(2);
+
+        // TexCoord attribute (location = 3)
+        glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(9 * sizeof(float)));
+        glEnableVertexAttribArray(3);
 
         // Unbind VAO
         glBindVertexArray(0);
@@ -248,7 +256,20 @@ public:
      */
     void drawMesh(const Mesh& mesh, const mat4& modelMatrix, const Camera& camera, const std::vector<Light>& lights)
     {
-        if (!initialized || !activeShader) return;
+        drawMesh(mesh, nullptr, modelMatrix, camera, lights);
+    }
+
+    /**
+     * Draw a mesh with material and lighting
+     * @param mesh Mesh to draw
+     * @param material Material to use (nullptr = use default shader)
+     * @param modelMatrix Model transformation matrix
+     * @param camera Camera for view/projection
+     * @param lights Array of scene lights
+     */
+    void drawMesh(const Mesh& mesh, Material* material, const mat4& modelMatrix, const Camera& camera, const std::vector<Light>& lights)
+    {
+        if (!initialized) return;
 
         // Get or create mesh buffer (lazy upload)
         auto it = meshBuffers.find(&mesh);
@@ -262,31 +283,53 @@ public:
 
         const MeshBuffer& buffer = it->second;
 
-        // Activate shader
-        activeShader->use();
+        // Use material shader if provided, otherwise use default
+        std::shared_ptr<Shader> shaderToUse = (material && material->getShader()) ? material->getShader() : activeShader;
+        
+        if (!shaderToUse || !shaderToUse->isValid())
+            return;
+
+        // Apply material properties if material is provided
+        if (material)
+        {
+            material->applyToShader();
+        }
+        else
+        {
+            shaderToUse->use();
+        }
 
         // Set transformation matrices
         mat4 view = camera.getViewMatrix();
         mat4 proj = camera.getProjectionMatrix();
 
-        activeShader->setMat4("model", modelMatrix);
-        activeShader->setMat4("view", view);
-        activeShader->setMat4("projection", proj);
-        activeShader->setVec3("viewPos", camera.position);
+        shaderToUse->setMat4("model", modelMatrix);
+        shaderToUse->setMat4("view", view);
+        shaderToUse->setMat4("projection", proj);
+        shaderToUse->setVec3("viewPos", camera.position);
 
         // Set lighting uniforms
         int numLights = std::min((int)lights.size(), RenderConfig::MAX_LIGHTS);
-        activeShader->setInt("numLights", numLights);
+        shaderToUse->setInt("numLights", numLights);
 
         for (int i = 0; i < numLights; i++)
         {
             std::string base = "lights[" + std::to_string(i) + "]";
             
-            activeShader->setInt(base + ".type", lights[i].type == Light::Type::Directional ? 0 : 1);
-            activeShader->setVec3(base + ".position", lights[i].position);
-            activeShader->setVec3(base + ".direction", lights[i].direction);
-            activeShader->setColor(base + ".color", lights[i].color);
-            activeShader->setFloat(base + ".intensity", lights[i].intensity);
+            shaderToUse->setInt(base + ".type", lights[i].type == Light::Type::Directional ? 0 : 1);
+            shaderToUse->setVec3(base + ".position", lights[i].position);
+            shaderToUse->setVec3(base + ".direction", lights[i].direction);
+            shaderToUse->setColor(base + ".color", lights[i].color);
+            shaderToUse->setFloat(base + ".intensity", lights[i].intensity);
+        }
+
+        // For built-in materials, set simple light uniforms (for Standard/Unlit shaders)
+        if (!lights.empty())
+        {
+            // Use first light as primary
+            shaderToUse->setVec3("lightDir", lights[0].direction);
+            shaderToUse->setColor("lightColor", lights[0].color);
+            shaderToUse->setVec3("ambientColor", vec3(0.1f, 0.1f, 0.15f));
         }
 
         // Draw mesh

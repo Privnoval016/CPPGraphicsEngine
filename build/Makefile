@@ -129,6 +129,19 @@ Game/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/build
 .PHONY : Game/fast
 
+#=============================================================================
+# Target rules for targets named MaterialDemo
+
+# Build rule for target.
+MaterialDemo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 MaterialDemo
+.PHONY : MaterialDemo
+
+# fast build rule for target.
+MaterialDemo/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/build
+.PHONY : MaterialDemo/fast
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -153,6 +166,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+material_demo.o: material_demo.cpp.o
+.PHONY : material_demo.o
+
+# target to build an object file
+material_demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/material_demo.cpp.o
+.PHONY : material_demo.cpp.o
+
+material_demo.i: material_demo.cpp.i
+.PHONY : material_demo.i
+
+# target to preprocess a source file
+material_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/material_demo.cpp.i
+.PHONY : material_demo.cpp.i
+
+material_demo.s: material_demo.cpp.s
+.PHONY : material_demo.s
+
+# target to generate assembly for a file
+material_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/material_demo.cpp.s
+.PHONY : material_demo.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +199,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Game"
+	@echo "... MaterialDemo"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... material_demo.o"
+	@echo "... material_demo.i"
+	@echo "... material_demo.s"
 .PHONY : help
 
 

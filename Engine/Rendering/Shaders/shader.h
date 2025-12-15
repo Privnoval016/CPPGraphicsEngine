@@ -75,10 +75,7 @@ private:
             return uniformCache[name];
         
         GLint location = glGetUniformLocation(programID, name.c_str());
-        if (location == -1)
-        {
-            std::cerr << "WARNING: Uniform '" << name << "' not found in shader" << std::endl;
-        }
+        // Don't warn about missing uniforms - shaders may not use all uniforms
         uniformCache[name] = location;
         return location;
     }
@@ -200,38 +197,53 @@ public:
     
     void setInt(const std::string& name, int value)
     {
-        glUniform1i(getUniformLocation(name), value);
+        GLint location = getUniformLocation(name);
+        if (location != -1)
+            glUniform1i(location, value);
     }
 
     void setFloat(const std::string& name, float value)
     {
-        glUniform1f(getUniformLocation(name), value);
+        GLint location = getUniformLocation(name);
+        if (location != -1)
+            glUniform1f(location, value);
     }
 
     void setBool(const std::string& name, bool value)
     {
-        glUniform1i(getUniformLocation(name), value ? 1 : 0);
+        GLint location = getUniformLocation(name);
+        if (location != -1)
+            glUniform1i(location, value ? 1 : 0);
     }
 
     void setVec3(const std::string& name, const vec3& value)
     {
-        glUniform3f(getUniformLocation(name), value.x(), value.y(), value.z());
+        GLint location = getUniformLocation(name);
+        if (location != -1)
+            glUniform3f(location, value.x(), value.y(), value.z());
     }
 
     void setVec3(const std::string& name, float x, float y, float z)
     {
-        glUniform3f(getUniformLocation(name), x, y, z);
+        GLint location = getUniformLocation(name);
+        if (location != -1)
+            glUniform3f(location, x, y, z);
     }
 
     void setColor(const std::string& name, const color& value)
     {
-        glUniform3f(getUniformLocation(name), value.x(), value.y(), value.z());
+        GLint location = getUniformLocation(name);
+        if (location != -1)
+            glUniform3f(location, value.x(), value.y(), value.z());
     }
 
     void setMat4(const std::string& name, const mat4& matrix, bool transpose = true)
     {
-        // transpose=true because our matrices are row-major, OpenGL expects column-major
-        glUniformMatrix4fv(getUniformLocation(name), 1, transpose ? GL_TRUE : GL_FALSE, &matrix.m[0][0]);
+        GLint location = getUniformLocation(name);
+        if (location != -1) {
+            // transpose=true because our matrices are row-major, OpenGL expects column-major
+            glUniformMatrix4fv(location, 1, transpose ? GL_TRUE : GL_FALSE, &matrix.m[0][0]);
+        }
     }
 };
 

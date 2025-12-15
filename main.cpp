@@ -24,8 +24,11 @@ int main()
 
     // Create ground
     auto ground = scene.createGameObject("Ground");
-    ground->setMesh(Mesh::createPlane(20, 20));
-    for (auto& v : ground->getMesh()->vertices) {
+    ground->addComponent<MeshFilter>()->setMesh(Mesh::createPlane(20, 20));
+    auto groundRenderer = ground->addComponent<MeshRenderer>();
+    
+    // Set vertex colors for ground
+    for (auto& v : ground->getComponent<MeshFilter>()->getMesh()->vertices) {
         v.vertexColor = color(0.3f, 0.5f, 0.3f);
     }
 
@@ -45,10 +48,12 @@ int main()
             obj->transform.setPosition(vec3(x * 3.0f, 1.5f, z * 3.0f));
 
             if ((x + z) % 2 == 0) {
-                obj->setMesh(Mesh::createCube());
+                auto meshFilter = obj->addComponent<MeshFilter>();
+                meshFilter->setMesh(Mesh::createCube());
+                
                 // Apply tint to cube's existing per-face colors for variety
                 float tintStrength = 0.6f;  // How much of the tint to apply
-                for (auto& v : obj->getMesh()->vertices) {
+                for (auto& v : meshFilter->getMesh()->vertices) {
                     // Blend original face color with tint color
                     v.vertexColor = color(
                         v.vertexColor.x() * (1.0f - tintStrength) + objColor.x() * tintStrength,
@@ -57,12 +62,17 @@ int main()
                     );
                 }
             } else {
-                obj->setMesh(Mesh::createSphere(1.0f, 2));
+                auto meshFilter = obj->addComponent<MeshFilter>();
+                meshFilter->setMesh(Mesh::createSphere(1.0f, 2));
+                
                 // Spheres get solid color
-                for (auto& v : obj->getMesh()->vertices) {
+                for (auto& v : meshFilter->getMesh()->vertices) {
                     v.vertexColor = objColor;
                 }
             }
+            
+            // Add MeshRenderer component
+            obj->addComponent<MeshRenderer>();
 
             // Add rotator to some objects
             if (x % 2 == 0) {
