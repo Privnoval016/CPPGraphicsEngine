@@ -1,0 +1,1 @@
+/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o -o ModelTest   -L/opt/homebrew/Cellar/sdl2/2.32.10/lib  -Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.32.10/lib /opt/homebrew/Cellar/sdl2/2.32.10/lib/libSDL2.dylib -framework OpenGL

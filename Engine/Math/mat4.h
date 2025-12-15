@@ -52,18 +52,18 @@ public:
     static mat4 translation(const vec3& pos)
     {
         mat4 result;
-        result.m[0][3] = pos.x();
-        result.m[1][3] = pos.y();
-        result.m[2][3] = pos.z();
+        result.m[0][3] = pos.x;
+        result.m[1][3] = pos.y;
+        result.m[2][3] = pos.z;
         return result;
     }
 
     static mat4 scale(const vec3& s)
     {
         mat4 result;
-        result.m[0][0] = s.x();
-        result.m[1][1] = s.y();
-        result.m[2][2] = s.z();
+        result.m[0][0] = s.x;
+        result.m[1][1] = s.y;
+        result.m[2][2] = s.z;
         return result;
     }
 
@@ -105,28 +105,28 @@ public:
 
     static mat4 euler(const vec3& angles)
     {
-        return rotationZ(angles.z()) * rotationY(angles.y()) * rotationX(angles.x());
+        return rotationZ(angles.z) * rotationY(angles.y) * rotationX(angles.x);
     }
 
     static mat4 axisAngle(const vec3& axis, float angle)
     {
         mat4 result;
-        vec3 a = normalize(axis);
+        vec3 a = axis.normalized();
         float c = std::cos(angle);
         float s = std::sin(angle);
         float t = 1.0f - c;
         
-        result.m[0][0] = t * a.x() * a.x() + c;
-        result.m[0][1] = t * a.x() * a.y() - s * a.z();
-        result.m[0][2] = t * a.x() * a.z() + s * a.y();
+        result.m[0][0] = t * a.x * a.x + c;
+        result.m[0][1] = t * a.x * a.y - s * a.z;
+        result.m[0][2] = t * a.x * a.z + s * a.y;
         
-        result.m[1][0] = t * a.x() * a.y() + s * a.z();
-        result.m[1][1] = t * a.y() * a.y() + c;
-        result.m[1][2] = t * a.y() * a.z() - s * a.x();
+        result.m[1][0] = t * a.x * a.y + s * a.z;
+        result.m[1][1] = t * a.y * a.y + c;
+        result.m[1][2] = t * a.y * a.z - s * a.x;
         
-        result.m[2][0] = t * a.x() * a.z() - s * a.y();
-        result.m[2][1] = t * a.y() * a.z() + s * a.x();
-        result.m[2][2] = t * a.z() * a.z() + c;
+        result.m[2][0] = t * a.x * a.z - s * a.y;
+        result.m[2][1] = t * a.y * a.z + s * a.x;
+        result.m[2][2] = t * a.z * a.z + c;
         
         return result;
     }
@@ -160,23 +160,23 @@ public:
 
     static mat4 lookAt(const vec3& eye, const vec3& center, const vec3& up)
     {
-        vec3 f = normalize(center - eye);
-        vec3 s = normalize(cross(f, up));
-        vec3 u = cross(s, f);
+        vec3 f = (center - eye).normalized();
+        vec3 s = vec3::cross(f, up).normalized();
+        vec3 u = vec3::cross(s, f);
 
         mat4 result;
-        result.m[0][0] = s.x();
-        result.m[0][1] = s.y();
-        result.m[0][2] = s.z();
-        result.m[1][0] = u.x();
-        result.m[1][1] = u.y();
-        result.m[1][2] = u.z();
-        result.m[2][0] = -f.x();
-        result.m[2][1] = -f.y();
-        result.m[2][2] = -f.z();
-        result.m[0][3] = -dot(s, eye);
-        result.m[1][3] = -dot(u, eye);
-        result.m[2][3] = dot(f, eye);
+        result.m[0][0] = s.x;
+        result.m[0][1] = s.y;
+        result.m[0][2] = s.z;
+        result.m[1][0] = u.x;
+        result.m[1][1] = u.y;
+        result.m[1][2] = u.z;
+        result.m[2][0] = -f.x;
+        result.m[2][1] = -f.y;
+        result.m[2][2] = -f.z;
+        result.m[0][3] = -vec3::dot(s, eye);
+        result.m[1][3] = -vec3::dot(u, eye);
+        result.m[2][3] = vec3::dot(f, eye);
         
         return result;
     }
@@ -205,10 +205,10 @@ public:
 
     vec3 transformPoint(const vec3& v) const
     {
-        float x = m[0][0] * v.x() + m[0][1] * v.y() + m[0][2] * v.z() + m[0][3];
-        float y = m[1][0] * v.x() + m[1][1] * v.y() + m[1][2] * v.z() + m[1][3];
-        float z = m[2][0] * v.x() + m[2][1] * v.y() + m[2][2] * v.z() + m[2][3];
-        float w = m[3][0] * v.x() + m[3][1] * v.y() + m[3][2] * v.z() + m[3][3];
+        float x = m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z + m[0][3];
+        float y = m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z + m[1][3];
+        float z = m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z + m[2][3];
+        float w = m[3][0] * v.x + m[3][1] * v.y + m[3][2] * v.z + m[3][3];
         
         if (w != 0.0f && w != 1.0f)
         {
@@ -222,9 +222,9 @@ public:
 
     vec3 transformDirection(const vec3& v) const
     {
-        float x = m[0][0] * v.x() + m[0][1] * v.y() + m[0][2] * v.z();
-        float y = m[1][0] * v.x() + m[1][1] * v.y() + m[1][2] * v.z();
-        float z = m[2][0] * v.x() + m[2][1] * v.y() + m[2][2] * v.z();
+        float x = m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z;
+        float y = m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z;
+        float z = m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z;
         return vec3(x, y, z);
     }
 

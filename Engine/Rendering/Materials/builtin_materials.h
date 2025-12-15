@@ -6,8 +6,8 @@
 #define BUILTIN_MATERIALS_H
 
 #include "material.h"
-#include "Shaders/shader.h"
-#include "texture.h"
+#include "../Shaders/shader.h"
+#include "../texture.h"
 #include <memory>
 
 /**
@@ -101,7 +101,7 @@ public:
             {
                 float a = roughness * roughness;
                 float a2 = a * a;
-                float NdotH = max(dot(N, H), 0.0);
+                float NdotH = max(dot(N,  H), 0.0);
                 float NdotH2 = NdotH * NdotH;
                 
                 float num = a2;
@@ -124,8 +124,8 @@ public:
             
             float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
             {
-                float NdotV = max(dot(N, V), 0.0);
-                float NdotL = max(dot(N, L), 0.0);
+                float NdotV = max(dot(N,  V), 0.0);
+                float NdotL = max(dot(N,  L), 0.0);
                 float ggx2 = GeometrySchlickGGX(NdotV, roughness);
                 float ggx1 = GeometrySchlickGGX(NdotL, roughness);
                 
@@ -179,17 +179,17 @@ public:
                 // Cook-Torrance BRDF
                 float NDF = DistributionGGX(N, H, roughness);
                 float G = GeometrySmith(N, V, L, roughness);
-                vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
+                vec3 F = fresnelSchlick(max(dot(H,  V), 0.0), F0);
                 
                 vec3 kS = F;
                 vec3 kD = vec3(1.0) - kS;
                 kD *= 1.0 - metallic;
                 
                 vec3 numerator = NDF * G * F;
-                float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0) + 0.0001;
+                float denominator = 4.0 * max(dot(N,  V), 0.0) * max(dot(N,  L), 0.0) + 0.0001;
                 vec3 specular = numerator / denominator;
                 
-                float NdotL = max(dot(N, L), 0.0);
+                float NdotL = max(dot(N,  L), 0.0);
                 vec3 Lo = (kD * albedo / PI + specular) * lightColor * NdotL;
                 
                 // Ambient
@@ -381,7 +381,7 @@ public:
                 vec3 diffuse = diff * lightColor * albedo;
                 
                 // Specular (Blinn-Phong)
-                float spec = pow(max(dot(N, H), 0.0), smoothness * 128.0);
+                float spec = pow(max(dot(N,  H), 0.0), smoothness * 128.0);
                 vec3 specularColor = spec * lightColor * specular;
                 
                 // Ambient

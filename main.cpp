@@ -56,9 +56,9 @@ int main()
                 for (auto& v : meshFilter->getMesh()->vertices) {
                     // Blend original face color with tint color
                     v.vertexColor = color(
-                        v.vertexColor.x() * (1.0f - tintStrength) + objColor.x() * tintStrength,
-                        v.vertexColor.y() * (1.0f - tintStrength) + objColor.y() * tintStrength,
-                        v.vertexColor.z() * (1.0f - tintStrength) + objColor.z() * tintStrength
+                        v.vertexColor.x * (1.0f - tintStrength) + objColor.x * tintStrength,
+                        v.vertexColor.y * (1.0f - tintStrength) + objColor.y * tintStrength,
+                        v.vertexColor.z * (1.0f - tintStrength) + objColor.z * tintStrength
                     );
                 }
             } else {

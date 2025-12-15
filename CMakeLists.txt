@@ -19,6 +19,7 @@ endif()
 
 # Engine source files
 set(ENGINE_MATH
+    Engine/Math/vec2.h
     Engine/Math/vec3.h
     Engine/Math/mat4.h
 )
@@ -42,17 +43,21 @@ set(ENGINE_RENDERING
     Engine/Rendering/color.h
     Engine/Rendering/Primitives/mesh.h
     Engine/Rendering/camera.h
-    Engine/Rendering/framebuffer.h
-    Engine/Rendering/rasterizer.h
     Engine/Rendering/light.h
-    Engine/Rendering/window.h
-    Engine/Rendering/opengl_window.h
-    Engine/Rendering/opengl_renderer.h
+    Engine/Rendering/texture.h
+    Engine/Rendering/Core/framebuffer.h
+    Engine/Rendering/Core/rasterizer.h
+    Engine/Rendering/Core/window.h
+    Engine/Rendering/Core/opengl_window.h
+    Engine/Rendering/Core/opengl_renderer.h
     Engine/Rendering/Shaders/shader.h
     Engine/Rendering/Shaders/default_shaders.h
-    Engine/Rendering/texture.h
-    Engine/Rendering/material.h
-    Engine/Rendering/builtin_materials.h
+    Engine/Rendering/Materials/material.h
+    Engine/Rendering/Materials/builtin_materials.h
+    Engine/Rendering/Materials/materialSerializer.h
+    Engine/Rendering/Loaders/modelLoader.h
+    Engine/Rendering/Loaders/textureLoader.h
+    Engine/Rendering/Loaders/stb_image.h
 )
 
 set(ENGINE_HEADERS
@@ -78,12 +83,39 @@ target_link_libraries(Game ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES})
 
 # Material demo executable
 add_executable(MaterialDemo
-    material_demo.cpp
+    Demos/material_demo.cpp
     ${ENGINE_HEADERS}
     ${USER_SCRIPTS}
 )
 
 target_link_libraries(MaterialDemo ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES})
+
+# Asset loading demo executable
+add_executable(AssetDemo
+    Demos/asset_demo.cpp
+    ${ENGINE_HEADERS}
+    ${USER_SCRIPTS}
+)
+
+target_link_libraries(AssetDemo ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES})
+
+# Model test executable
+add_executable(ModelTest
+    Demos/model_test.cpp
+    ${ENGINE_HEADERS}
+    ${USER_SCRIPTS}
+)
+
+target_link_libraries(ModelTest ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES})
+
+# Custom material demo executable
+add_executable(CustomMaterialDemo
+    Demos/custom_material_demo.cpp
+    ${ENGINE_HEADERS}
+    ${USER_SCRIPTS}
+)
+
+target_link_libraries(CustomMaterialDemo ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES})
 
 # Set as default target
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Game)

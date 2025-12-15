@@ -5,10 +5,10 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
-#include "Shaders/shader.h"
-#include "texture.h"
-#include "../Math/vec3.h"
-#include "color.h"
+#include "../Shaders/shader.h"
+#include "../texture.h"
+#include "../../Math/vec3.h"
+#include "../color.h"
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -46,6 +46,18 @@ private:
     std::unordered_map<std::string, color> colorProperties;
     std::unordered_map<std::string, std::shared_ptr<Texture>> textureProperties;
     std::unordered_map<std::string, int> intProperties;
+    
+    // Default white texture for unbound samplers (prevents OpenGL warnings)
+    static std::shared_ptr<Texture> getDefaultTexture()
+    {
+        static std::shared_ptr<Texture> defaultTex;
+        if (!defaultTex)
+        {
+            defaultTex = std::make_shared<Texture>();
+            defaultTex->createSolidColor(1.0f, 1.0f, 1.0f, 1.0f);  // White
+        }
+        return defaultTex;
+    }
 
 public:
     Material()
@@ -180,14 +192,28 @@ public:
 
         // Apply texture properties
         int textureUnit = 0;
-        for (const auto& [name, texture] : textureProperties)
+        
+        // List of common texture samplers (bind default texture if not set)
+        std::vector<std::string> samplerNames = {
+            "_MainTex", "_MetallicGlossMap", "_BumpMap", "_OcclusionMap"
+        };
+        
+        for (const std::string& samplerName : samplerNames)
         {
-            if (texture && texture->isLoaded())
+            auto it = textureProperties.find(samplerName);
+            if (it != textureProperties.end() && it->second && it->second->isLoaded())
             {
-                texture->bind(textureUnit);
-                shader->setInt(name, textureUnit);
-                textureUnit++;
+                // Use custom texture
+                it->second->bind(textureUnit);
+                shader->setInt(samplerName, textureUnit);
             }
+            else
+            {
+                // Bind default white texture to prevent warnings
+                getDefaultTexture()->bind(textureUnit);
+                shader->setInt(samplerName, textureUnit);
+            }
+            textureUnit++;
         }
     }
 
@@ -217,6 +243,14 @@ public:
         copy->intProperties = intProperties;
         return copy;
     }
+
+    // ==================== Property Getters (for serialization) ====================
+    
+    const std::unordered_map<std::string, float>& getFloatProperties() const { return floatProperties; }
+    const std::unordered_map<std::string, vec3>& getVectorProperties() const { return vectorProperties; }
+    const std::unordered_map<std::string, color>& getColorProperties() const { return colorProperties; }
+    const std::unordered_map<std::string, std::shared_ptr<Texture>>& getTextureProperties() const { return textureProperties; }
+    const std::unordered_map<std::string, int>& getIntProperties() const { return intProperties; }
 };
 
 #endif //MATERIAL_H

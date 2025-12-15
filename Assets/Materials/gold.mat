@@ -1,0 +1,7 @@
+# Gold Material
+# Metallic PBR material simulating gold
+
+materialType: Standard
+color: _Color 1.0 0.843 0.0
+float: _Metallic 1.0
+float: _Smoothness 0.95

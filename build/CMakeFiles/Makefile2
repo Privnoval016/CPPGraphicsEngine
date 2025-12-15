@@ -65,11 +65,17 @@ CMAKE_BINARY_DIR = /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build
 # The main recursive "all" target.
 all: CMakeFiles/Game.dir/all
 all: CMakeFiles/MaterialDemo.dir/all
+all: CMakeFiles/AssetDemo.dir/all
+all: CMakeFiles/ModelTest.dir/all
+all: CMakeFiles/CustomMaterialDemo.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/Game.dir/codegen
 codegen: CMakeFiles/MaterialDemo.dir/codegen
+codegen: CMakeFiles/AssetDemo.dir/codegen
+codegen: CMakeFiles/ModelTest.dir/codegen
+codegen: CMakeFiles/CustomMaterialDemo.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -79,6 +85,9 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/Game.dir/clean
 clean: CMakeFiles/MaterialDemo.dir/clean
+clean: CMakeFiles/AssetDemo.dir/clean
+clean: CMakeFiles/ModelTest.dir/clean
+clean: CMakeFiles/CustomMaterialDemo.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -88,7 +97,7 @@ clean: CMakeFiles/MaterialDemo.dir/clean
 CMakeFiles/Game.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=1,2 "Built target Game"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=5,6 "Built target Game"
 .PHONY : CMakeFiles/Game.dir/all
 
 # Build rule for subdir invocation for target.
@@ -105,7 +114,7 @@ Game: CMakeFiles/Game.dir/rule
 # codegen rule for target.
 CMakeFiles/Game.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=1,2 "Finished codegen for target Game"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=5,6 "Finished codegen for target Game"
 .PHONY : CMakeFiles/Game.dir/codegen
 
 # clean rule for target.
@@ -120,7 +129,7 @@ CMakeFiles/Game.dir/clean:
 CMakeFiles/MaterialDemo.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=3,4 "Built target MaterialDemo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=7,8 "Built target MaterialDemo"
 .PHONY : CMakeFiles/MaterialDemo.dir/all
 
 # Build rule for subdir invocation for target.
@@ -137,13 +146,109 @@ MaterialDemo: CMakeFiles/MaterialDemo.dir/rule
 # codegen rule for target.
 CMakeFiles/MaterialDemo.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=3,4 "Finished codegen for target MaterialDemo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=7,8 "Finished codegen for target MaterialDemo"
 .PHONY : CMakeFiles/MaterialDemo.dir/codegen
 
 # clean rule for target.
 CMakeFiles/MaterialDemo.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/clean
 .PHONY : CMakeFiles/MaterialDemo.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/AssetDemo.dir
+
+# All Build rule for target.
+CMakeFiles/AssetDemo.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AssetDemo.dir/build.make CMakeFiles/AssetDemo.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AssetDemo.dir/build.make CMakeFiles/AssetDemo.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=1,2 "Built target AssetDemo"
+.PHONY : CMakeFiles/AssetDemo.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/AssetDemo.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/AssetDemo.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles 0
+.PHONY : CMakeFiles/AssetDemo.dir/rule
+
+# Convenience name for target.
+AssetDemo: CMakeFiles/AssetDemo.dir/rule
+.PHONY : AssetDemo
+
+# codegen rule for target.
+CMakeFiles/AssetDemo.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AssetDemo.dir/build.make CMakeFiles/AssetDemo.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=1,2 "Finished codegen for target AssetDemo"
+.PHONY : CMakeFiles/AssetDemo.dir/codegen
+
+# clean rule for target.
+CMakeFiles/AssetDemo.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AssetDemo.dir/build.make CMakeFiles/AssetDemo.dir/clean
+.PHONY : CMakeFiles/AssetDemo.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/ModelTest.dir
+
+# All Build rule for target.
+CMakeFiles/ModelTest.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ModelTest.dir/build.make CMakeFiles/ModelTest.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ModelTest.dir/build.make CMakeFiles/ModelTest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=9,10 "Built target ModelTest"
+.PHONY : CMakeFiles/ModelTest.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ModelTest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ModelTest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles 0
+.PHONY : CMakeFiles/ModelTest.dir/rule
+
+# Convenience name for target.
+ModelTest: CMakeFiles/ModelTest.dir/rule
+.PHONY : ModelTest
+
+# codegen rule for target.
+CMakeFiles/ModelTest.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ModelTest.dir/build.make CMakeFiles/ModelTest.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=9,10 "Finished codegen for target ModelTest"
+.PHONY : CMakeFiles/ModelTest.dir/codegen
+
+# clean rule for target.
+CMakeFiles/ModelTest.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ModelTest.dir/build.make CMakeFiles/ModelTest.dir/clean
+.PHONY : CMakeFiles/ModelTest.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/CustomMaterialDemo.dir
+
+# All Build rule for target.
+CMakeFiles/CustomMaterialDemo.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomMaterialDemo.dir/build.make CMakeFiles/CustomMaterialDemo.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomMaterialDemo.dir/build.make CMakeFiles/CustomMaterialDemo.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=3,4 "Built target CustomMaterialDemo"
+.PHONY : CMakeFiles/CustomMaterialDemo.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/CustomMaterialDemo.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/CustomMaterialDemo.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles 0
+.PHONY : CMakeFiles/CustomMaterialDemo.dir/rule
+
+# Convenience name for target.
+CustomMaterialDemo: CMakeFiles/CustomMaterialDemo.dir/rule
+.PHONY : CustomMaterialDemo
+
+# codegen rule for target.
+CMakeFiles/CustomMaterialDemo.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomMaterialDemo.dir/build.make CMakeFiles/CustomMaterialDemo.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=3,4 "Finished codegen for target CustomMaterialDemo"
+.PHONY : CMakeFiles/CustomMaterialDemo.dir/codegen
+
+# clean rule for target.
+CMakeFiles/CustomMaterialDemo.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomMaterialDemo.dir/build.make CMakeFiles/CustomMaterialDemo.dir/clean
+.PHONY : CMakeFiles/CustomMaterialDemo.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

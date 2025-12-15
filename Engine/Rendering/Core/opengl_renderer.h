@@ -13,12 +13,12 @@
 #include <GL/glew.h>
 #endif
 
-#include "Primitives/mesh.h"
-#include "camera.h"
-#include "light.h"
-#include "Shaders/shader.h"
-#include "Shaders/default_shaders.h"
-#include "../Math/mat4.h"
+#include "../Primitives/mesh.h"
+#include "../camera.h"
+#include "../light.h"
+#include "../Shaders/shader.h"
+#include "../Shaders/default_shaders.h"
+#include "../../Math/mat4.h"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -79,20 +79,20 @@ private:
         for (const auto& v : mesh.vertices)
         {
             // Position
-            vertices.push_back(v.position.x());
-            vertices.push_back(v.position.y());
-            vertices.push_back(v.position.z());
+            vertices.push_back(v.position.x);
+            vertices.push_back(v.position.y);
+            vertices.push_back(v.position.z);
             // Normal
-            vertices.push_back(v.normal.x());
-            vertices.push_back(v.normal.y());
-            vertices.push_back(v.normal.z());
+            vertices.push_back(v.normal.x);
+            vertices.push_back(v.normal.y);
+            vertices.push_back(v.normal.z);
             // Color
-            vertices.push_back(v.vertexColor.x());
-            vertices.push_back(v.vertexColor.y());
-            vertices.push_back(v.vertexColor.z());
+            vertices.push_back(v.vertexColor.x);
+            vertices.push_back(v.vertexColor.y);
+            vertices.push_back(v.vertexColor.z);
             // UV (only x and y from vec3)
-            vertices.push_back(v.uv.x());
-            vertices.push_back(v.uv.y());
+            vertices.push_back(v.uv.x);
+            vertices.push_back(v.uv.y);
         }
 
         // Prepare index data (3 indices per triangle)

@@ -31,7 +31,7 @@ public:
     {
         Light light;
         light.type = Type::Directional;
-        light.direction = normalize(dir);
+        light.direction = dir.normalized();
         light.color = col;
         light.intensity = intensity;
         light.position = vec3::zero;
@@ -61,7 +61,7 @@ public:
         Light light;
         light.type = Type::Spot;
         light.position = pos;
-        light.direction = normalize(dir);
+        light.direction = dir.normalized();
         light.color = col;
         light.intensity = intensity;
         light.range = range;

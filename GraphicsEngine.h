@@ -23,6 +23,7 @@
 #include "Engine/Core/Systems/input.h"
 
 // Math
+#include "Engine/Math/vec2.h"
 #include "Engine/Math/vec3.h"
 #include "Engine/Math/mat4.h"
 
@@ -31,14 +32,17 @@
 #include "Engine/Rendering/Primitives/mesh.h"
 #include "Engine/Rendering/camera.h"
 #include "Engine/Rendering/light.h"
-#include "Engine/Rendering/framebuffer.h"
+#include "Engine/Rendering/Core/framebuffer.h"
 #include "Engine/Rendering/texture.h"
-#include "Engine/Rendering/material.h"
-#include "Engine/Rendering/builtin_materials.h"
-#include "Engine/Rendering/rasterizer.h"
-#include "Engine/Rendering/window.h"
-#include "Engine/Rendering/opengl_window.h"
-#include "Engine/Rendering/opengl_renderer.h"
+#include "Engine/Rendering/Loaders/textureLoader.h"
+#include "Engine/Rendering/Materials/material.h"
+#include "Engine/Rendering/Materials/builtin_materials.h"
+#include "Engine/Rendering/Materials/materialSerializer.h"
+#include "Engine/Rendering/Loaders/modelLoader.h"
+#include "Engine/Rendering/Core/rasterizer.h"
+#include "Engine/Rendering/Core/window.h"
+#include "Engine/Rendering/Core/opengl_window.h"
+#include "Engine/Rendering/Core/opengl_renderer.h"
 #include "Engine/Rendering/Shaders/shader.h"
 #include "Engine/Rendering/Shaders/default_shaders.h"
 
@@ -85,11 +89,9 @@ namespace Engine
      * @param height Window height
      * @param title Window title
      * @param targetFPS Target FPS (0 = unlimited)
-     * @param onOpenGLReady Optional callback called after OpenGL context is ready (for creating materials/shaders)
      */
     inline void runOpenGL(Scene& scene, int width = 1280, int height = 720, 
-                         const std::string& title = "Graphics Engine", int targetFPS = 60,
-                         std::function<void(Scene&)> onOpenGLReady = nullptr)
+                         const std::string& title = "Graphics Engine", int targetFPS = 60)
     {
         OpenGLWindow window(width, height, title);
         if (!window.isOpen) {
@@ -103,10 +105,8 @@ namespace Engine
             return;
         }
 
-        // Call onOpenGLReady callback AFTER OpenGL context is ready
-        if (onOpenGLReady) {
-            onOpenGLReady(scene);
-        }
+        // Call scene's OpenGL ready callback after context is created
+        scene._invokeOpenGLReady();
 
         // Call awake/start on all components
         scene.awake();

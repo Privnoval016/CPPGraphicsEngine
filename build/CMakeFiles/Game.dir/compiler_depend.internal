@@ -779,22 +779,32 @@ CMakeFiles/Game.dir/main.cpp.o
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/default_shaders.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/framebuffer.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/material.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/rasterizer.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/rasterizer.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/window.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/texture.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/window.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/builtin_materials.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec2.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/behaviour.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/component.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/transformComponent.h
@@ -817,21 +827,28 @@ CMakeFiles/Game.dir/main.cpp.o
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/gameObject.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/scene.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec2.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_renderer.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_window.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/rasterizer.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/window.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/texture.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/modelLoader.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/stb_image.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/textureLoader.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/builtin_materials.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/materialSerializer.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/default_shaders.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/builtin_materials.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/framebuffer.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/material.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/opengl_renderer.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/opengl_window.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/rasterizer.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/texture.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/window.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/GraphicsEngine.h
  /opt/homebrew/Cellar/sdl2/2.32.10/include/SDL2/SDL.h
  /opt/homebrew/Cellar/sdl2/2.32.10/include/SDL2/SDL_assert.h

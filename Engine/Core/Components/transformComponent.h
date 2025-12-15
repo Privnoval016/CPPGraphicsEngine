@@ -70,9 +70,9 @@ private:
             cachedWorldPosition = parentTransform->getWorldPosition() + localPosition;
             cachedWorldRotation = parentTransform->getWorldRotation() + localRotation;
             cachedWorldScale = vec3(
-                parentTransform->getWorldScale().x() * localScale.x(),
-                parentTransform->getWorldScale().y() * localScale.y(),
-                parentTransform->getWorldScale().z() * localScale.z()
+                parentTransform->getWorldScale().x * localScale.x,
+                parentTransform->getWorldScale().y * localScale.y,
+                parentTransform->getWorldScale().z * localScale.z
             );
         } else {
             // No parent - world = local
@@ -301,7 +301,7 @@ public:
     vec3 forward() const
     {
         mat4 rot = mat4::euler(getWorldRotation());
-        return normalize(rot.transformDirection(vec3::forward));
+        return rot.transformDirection(vec3::forward).normalized();
     }
 
     /**
@@ -310,7 +310,7 @@ public:
     vec3 right() const
     {
         mat4 rot = mat4::euler(getWorldRotation());
-        return normalize(rot.transformDirection(vec3::right));
+        return rot.transformDirection(vec3::right).normalized();
     }
 
     /**
@@ -319,7 +319,7 @@ public:
     vec3 up() const
     {
         mat4 rot = mat4::euler(getWorldRotation());
-        return normalize(rot.transformDirection(vec3::up));
+        return rot.transformDirection(vec3::up).normalized();
     }
 };
 

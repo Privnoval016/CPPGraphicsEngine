@@ -5,7 +5,7 @@
 #ifndef FRAMEBUFFER_H
 #define FRAMEBUFFER_H
 
-#include "color.h"
+#include "../color.h"
 #include <vector>
 #include <limits>
 #include <algorithm>
@@ -129,9 +129,9 @@ public:
         for (int i = 0; i < width * height; i++)
         {
             const color& c = colorBuffer[i];
-            pixels[i * 3 + 0] = static_cast<unsigned char>(std::min(255.0f, std::max(0.0f, c.x() * 255.999f)));
-            pixels[i * 3 + 1] = static_cast<unsigned char>(std::min(255.0f, std::max(0.0f, c.y() * 255.999f)));
-            pixels[i * 3 + 2] = static_cast<unsigned char>(std::min(255.0f, std::max(0.0f, c.z() * 255.999f)));
+            pixels[i * 3 + 0] = static_cast<unsigned char>(std::min(255.0f, std::max(0.0f, c.x * 255.999f)));
+            pixels[i * 3 + 1] = static_cast<unsigned char>(std::min(255.0f, std::max(0.0f, c.y * 255.999f)));
+            pixels[i * 3 + 2] = static_cast<unsigned char>(std::min(255.0f, std::max(0.0f, c.z * 255.999f)));
         }
         
         return pixels;

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MaterialDemo.dir/material_demo.cpp.o"
-  "CMakeFiles/MaterialDemo.dir/material_demo.cpp.o.d"
+  "CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o"
+  "CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o.d"
   "MaterialDemo"
   "MaterialDemo.pdb"
 )

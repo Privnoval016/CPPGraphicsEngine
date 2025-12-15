@@ -7,7 +7,7 @@
 
 #include "component.h"
 #include "meshFilter.h"
-#include "../../Rendering/material.h"
+#include "../../Rendering/Materials/material.h"
 #include <memory>
 
 /**

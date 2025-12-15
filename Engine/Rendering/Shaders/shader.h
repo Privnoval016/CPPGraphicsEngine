@@ -220,7 +220,7 @@ public:
     {
         GLint location = getUniformLocation(name);
         if (location != -1)
-            glUniform3f(location, value.x(), value.y(), value.z());
+            glUniform3f(location, value.x, value.y, value.z);
     }
 
     void setVec3(const std::string& name, float x, float y, float z)
@@ -234,7 +234,7 @@ public:
     {
         GLint location = getUniformLocation(name);
         if (location != -1)
-            glUniform3f(location, value.x(), value.y(), value.z());
+            glUniform3f(location, value.x, value.y, value.z);
     }
 
     void setMat4(const std::string& name, const mat4& matrix, bool transpose = true)

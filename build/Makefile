@@ -142,6 +142,141 @@ MaterialDemo/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/build
 .PHONY : MaterialDemo/fast
 
+#=============================================================================
+# Target rules for targets named AssetDemo
+
+# Build rule for target.
+AssetDemo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AssetDemo
+.PHONY : AssetDemo
+
+# fast build rule for target.
+AssetDemo/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AssetDemo.dir/build.make CMakeFiles/AssetDemo.dir/build
+.PHONY : AssetDemo/fast
+
+#=============================================================================
+# Target rules for targets named ModelTest
+
+# Build rule for target.
+ModelTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ModelTest
+.PHONY : ModelTest
+
+# fast build rule for target.
+ModelTest/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ModelTest.dir/build.make CMakeFiles/ModelTest.dir/build
+.PHONY : ModelTest/fast
+
+#=============================================================================
+# Target rules for targets named CustomMaterialDemo
+
+# Build rule for target.
+CustomMaterialDemo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CustomMaterialDemo
+.PHONY : CustomMaterialDemo
+
+# fast build rule for target.
+CustomMaterialDemo/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomMaterialDemo.dir/build.make CMakeFiles/CustomMaterialDemo.dir/build
+.PHONY : CustomMaterialDemo/fast
+
+Demos/asset_demo.o: Demos/asset_demo.cpp.o
+.PHONY : Demos/asset_demo.o
+
+# target to build an object file
+Demos/asset_demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AssetDemo.dir/build.make CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.o
+.PHONY : Demos/asset_demo.cpp.o
+
+Demos/asset_demo.i: Demos/asset_demo.cpp.i
+.PHONY : Demos/asset_demo.i
+
+# target to preprocess a source file
+Demos/asset_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AssetDemo.dir/build.make CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.i
+.PHONY : Demos/asset_demo.cpp.i
+
+Demos/asset_demo.s: Demos/asset_demo.cpp.s
+.PHONY : Demos/asset_demo.s
+
+# target to generate assembly for a file
+Demos/asset_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AssetDemo.dir/build.make CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.s
+.PHONY : Demos/asset_demo.cpp.s
+
+Demos/custom_material_demo.o: Demos/custom_material_demo.cpp.o
+.PHONY : Demos/custom_material_demo.o
+
+# target to build an object file
+Demos/custom_material_demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomMaterialDemo.dir/build.make CMakeFiles/CustomMaterialDemo.dir/Demos/custom_material_demo.cpp.o
+.PHONY : Demos/custom_material_demo.cpp.o
+
+Demos/custom_material_demo.i: Demos/custom_material_demo.cpp.i
+.PHONY : Demos/custom_material_demo.i
+
+# target to preprocess a source file
+Demos/custom_material_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomMaterialDemo.dir/build.make CMakeFiles/CustomMaterialDemo.dir/Demos/custom_material_demo.cpp.i
+.PHONY : Demos/custom_material_demo.cpp.i
+
+Demos/custom_material_demo.s: Demos/custom_material_demo.cpp.s
+.PHONY : Demos/custom_material_demo.s
+
+# target to generate assembly for a file
+Demos/custom_material_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomMaterialDemo.dir/build.make CMakeFiles/CustomMaterialDemo.dir/Demos/custom_material_demo.cpp.s
+.PHONY : Demos/custom_material_demo.cpp.s
+
+Demos/material_demo.o: Demos/material_demo.cpp.o
+.PHONY : Demos/material_demo.o
+
+# target to build an object file
+Demos/material_demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o
+.PHONY : Demos/material_demo.cpp.o
+
+Demos/material_demo.i: Demos/material_demo.cpp.i
+.PHONY : Demos/material_demo.i
+
+# target to preprocess a source file
+Demos/material_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.i
+.PHONY : Demos/material_demo.cpp.i
+
+Demos/material_demo.s: Demos/material_demo.cpp.s
+.PHONY : Demos/material_demo.s
+
+# target to generate assembly for a file
+Demos/material_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.s
+.PHONY : Demos/material_demo.cpp.s
+
+Demos/model_test.o: Demos/model_test.cpp.o
+.PHONY : Demos/model_test.o
+
+# target to build an object file
+Demos/model_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ModelTest.dir/build.make CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o
+.PHONY : Demos/model_test.cpp.o
+
+Demos/model_test.i: Demos/model_test.cpp.i
+.PHONY : Demos/model_test.i
+
+# target to preprocess a source file
+Demos/model_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ModelTest.dir/build.make CMakeFiles/ModelTest.dir/Demos/model_test.cpp.i
+.PHONY : Demos/model_test.cpp.i
+
+Demos/model_test.s: Demos/model_test.cpp.s
+.PHONY : Demos/model_test.s
+
+# target to generate assembly for a file
+Demos/model_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ModelTest.dir/build.make CMakeFiles/ModelTest.dir/Demos/model_test.cpp.s
+.PHONY : Demos/model_test.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -166,30 +301,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-material_demo.o: material_demo.cpp.o
-.PHONY : material_demo.o
-
-# target to build an object file
-material_demo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/material_demo.cpp.o
-.PHONY : material_demo.cpp.o
-
-material_demo.i: material_demo.cpp.i
-.PHONY : material_demo.i
-
-# target to preprocess a source file
-material_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/material_demo.cpp.i
-.PHONY : material_demo.cpp.i
-
-material_demo.s: material_demo.cpp.s
-.PHONY : material_demo.s
-
-# target to generate assembly for a file
-material_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MaterialDemo.dir/build.make CMakeFiles/MaterialDemo.dir/material_demo.cpp.s
-.PHONY : material_demo.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -198,14 +309,26 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... AssetDemo"
+	@echo "... CustomMaterialDemo"
 	@echo "... Game"
 	@echo "... MaterialDemo"
+	@echo "... ModelTest"
+	@echo "... Demos/asset_demo.o"
+	@echo "... Demos/asset_demo.i"
+	@echo "... Demos/asset_demo.s"
+	@echo "... Demos/custom_material_demo.o"
+	@echo "... Demos/custom_material_demo.i"
+	@echo "... Demos/custom_material_demo.s"
+	@echo "... Demos/material_demo.o"
+	@echo "... Demos/material_demo.i"
+	@echo "... Demos/material_demo.s"
+	@echo "... Demos/model_test.o"
+	@echo "... Demos/model_test.i"
+	@echo "... Demos/model_test.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... material_demo.o"
-	@echo "... material_demo.i"
-	@echo "... material_demo.s"
 .PHONY : help
 
 

@@ -1,0 +1,7 @@
+# Green Plastic Material
+# Non-metallic with some smoothness
+
+materialType: Standard
+color: _Color 0.1 0.8 0.2
+float: _Metallic 0.0
+float: _Smoothness 0.6

@@ -56,9 +56,9 @@ public:
         if (input.getKey(SDL_SCANCODE_SPACE)) velocity += vec3::up;
         if (input.getKey(SDL_SCANCODE_LSHIFT)) velocity -= vec3::up;
 
-        if (velocity.sqr_magnitude() > 0.01f)
+        if (velocity.lengthSquared() > 0.01f)
         {
-            velocity = normalize(velocity);
+            velocity = velocity.normalized();
             float speed = moveSpeed;
             
             // Sprint
@@ -90,15 +90,15 @@ public:
 
             // Calculate forward direction
             vec3 direction;
-            direction.e[0] = std::cos(yaw * M_PI / 180.0f) * std::cos(pitch * M_PI / 180.0f);
-            direction.e[1] = std::sin(pitch * M_PI / 180.0f);
-            direction.e[2] = std::sin(yaw * M_PI / 180.0f) * std::cos(pitch * M_PI / 180.0f);
+            direction.x = std::cos(yaw * M_PI / 180.0f) * std::cos(pitch * M_PI / 180.0f);
+            direction.y = std::sin(pitch * M_PI / 180.0f);
+            direction.z = std::sin(yaw * M_PI / 180.0f) * std::cos(pitch * M_PI / 180.0f);
 
             // Update transform rotation to match look direction
             // Convert direction to euler angles
-            vec3 lookDir = normalize(direction);
-            float yawRad = std::atan2(lookDir.z(), lookDir.x());
-            float pitchRad = std::asin(lookDir.y());
+            vec3 lookDir = direction.normalized();
+            float yawRad = std::atan2(lookDir.z, lookDir.x);
+            float pitchRad = std::asin(lookDir.y);
             
             setRotation(vec3(pitchRad, yawRad, 0));
         }

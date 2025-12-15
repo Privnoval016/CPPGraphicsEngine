@@ -6,6 +6,7 @@
 #define MESH_H
 
 #include "../../Math/vec3.h"
+#include "../../Math/vec2.h"
 #include "../color.h"
 #include <vector>
 #include <memory>
@@ -21,6 +22,10 @@ struct Vertex
     
     Vertex(const vec3& pos, const vec3& norm = vec3::up, const vec3& texCoord = vec3::zero, const color& col = color(1, 1, 1))
         : position(pos), normal(norm), uv(texCoord), vertexColor(col) {}
+    
+    // Texture coordinate accessors (for convenience with vec2)
+    vec2 getTexCoord() const { return vec2(uv.x, uv.y); }
+    void setTexCoord(const vec2& tc) { uv.x = tc.x; uv.y = tc.y; }
 };
 
 struct Triangle
@@ -134,20 +139,20 @@ public:
         float t = (1.0f + std::sqrt(5.0f)) / 2.0f;
         
         mesh->vertices = {
-            Vertex(normalize(vec3(-1, t, 0)) * radius, vec3(0, 1, 0)),
-            Vertex(normalize(vec3(1, t, 0)) * radius, vec3(0, 1, 0)),
-            Vertex(normalize(vec3(-1, -t, 0)) * radius, vec3(0, -1, 0)),
-            Vertex(normalize(vec3(1, -t, 0)) * radius, vec3(0, -1, 0)),
+            Vertex(vec3(-1, t, 0).normalized() * radius, vec3(0, 1, 0)),
+            Vertex(vec3(1, t, 0).normalized() * radius, vec3(0, 1, 0)),
+            Vertex(vec3(-1, -t, 0).normalized() * radius, vec3(0, -1, 0)),
+            Vertex(vec3(1, -t, 0).normalized() * radius, vec3(0, -1, 0)),
             
-            Vertex(normalize(vec3(0, -1, t)) * radius, vec3(0, 0, 1)),
-            Vertex(normalize(vec3(0, 1, t)) * radius, vec3(0, 0, 1)),
-            Vertex(normalize(vec3(0, -1, -t)) * radius, vec3(0, 0, -1)),
-            Vertex(normalize(vec3(0, 1, -t)) * radius, vec3(0, 0, -1)),
+            Vertex(vec3(0, -1, t).normalized() * radius, vec3(0, 0, 1)),
+            Vertex(vec3(0, 1, t).normalized() * radius, vec3(0, 0, 1)),
+            Vertex(vec3(0, -1, -t).normalized() * radius, vec3(0, 0, -1)),
+            Vertex(vec3(0, 1, -t).normalized() * radius, vec3(0, 0, -1)),
             
-            Vertex(normalize(vec3(t, 0, -1)) * radius, vec3(1, 0, 0)),
-            Vertex(normalize(vec3(t, 0, 1)) * radius, vec3(1, 0, 0)),
-            Vertex(normalize(vec3(-t, 0, -1)) * radius, vec3(-1, 0, 0)),
-            Vertex(normalize(vec3(-t, 0, 1)) * radius, vec3(-1, 0, 0))
+            Vertex(vec3(t, 0, -1).normalized() * radius, vec3(1, 0, 0)),
+            Vertex(vec3(t, 0, 1).normalized() * radius, vec3(1, 0, 0)),
+            Vertex(vec3(-t, 0, -1).normalized() * radius, vec3(-1, 0, 0)),
+            Vertex(vec3(-t, 0, 1).normalized() * radius, vec3(-1, 0, 0))
         };
 
         mesh->triangles = {
@@ -160,7 +165,7 @@ public:
         // Update normals based on sphere positions
         for (auto& v : mesh->vertices)
         {
-            v.normal = normalize(v.position);
+            v.normal = v.position.normalized();
             v.vertexColor = color(0.8f, 0.3f, 0.3f);
         }
 
@@ -180,7 +185,7 @@ public:
             vec3 v1 = vertices[tri.v1].position;
             vec3 v2 = vertices[tri.v2].position;
 
-            vec3 normal = normalize(cross(v1 - v0, v2 - v0));
+            vec3 normal = vec3::cross(v1 - v0, v2 - v0).normalized();
 
             vertices[tri.v0].normal += normal;
             vertices[tri.v1].normal += normal;
@@ -190,8 +195,8 @@ public:
         // Normalize
         for (auto& v : vertices)
         {
-            if (v.normal.sqr_magnitude() > 0.001f)
-                v.normal = normalize(v.normal);
+            if (v.normal.lengthSquared() > 0.001f)
+                v.normal = v.normal.normalized();
         }
     }
 };

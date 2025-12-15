@@ -89,12 +89,12 @@ public:
     // Rotate camera
     void rotate(float pitch, float yaw, float roll = 0.0f)
     {
-        rotation = vec3(rotation.x() + pitch, rotation.y() + yaw, rotation.z() + roll);
+        rotation = vec3(rotation.x + pitch, rotation.y + yaw, rotation.z + roll);
         
         // Clamp pitch to prevent gimbal lock
         const float maxPitch = 89.0f * 3.14159f / 180.0f;
-        if (rotation.x() > maxPitch) rotation[0] = maxPitch;
-        if (rotation.x() < -maxPitch) rotation[0] = -maxPitch;
+        if (rotation.x > maxPitch) rotation[0] = maxPitch;
+        if (rotation.x < -maxPitch) rotation[0] = -maxPitch;
         
         updateVectors();
     }
@@ -102,9 +102,9 @@ public:
     // Move camera in local space
     void translate(const vec3& offset)
     {
-        position += right * offset.x();
-        position += up * offset.y();
-        position += forward * offset.z();
+        position += right * offset.x;
+        position += up * offset.y;
+        position += forward * offset.z;
     }
 
     // Move camera in world space
@@ -116,11 +116,11 @@ public:
     // Look at a target
     void lookAt(const vec3& target)
     {
-        vec3 direction = normalize(target - position);
+        vec3 direction = target - position.normalized();
         
         // Calculate yaw and pitch from direction
-        rotation[1] = std::atan2(direction.x(), direction.z()); // yaw
-        rotation[0] = std::asin(-direction.y()); // pitch
+        rotation[1] = std::atan2(direction.x, direction.z); // yaw
+        rotation[0] = std::asin(-direction.y); // pitch
         rotation[2] = 0.0f; // roll
         
         updateVectors();
@@ -148,9 +148,9 @@ public:
     // Setter for forward direction
     void setForward(const vec3& newForward)
     {
-        forward = normalize(newForward);
-        right = normalize(cross(forward, vec3(0, 1, 0)));
-        up = normalize(cross(right, forward));
+        forward = newForward.normalized();
+        right = vec3::cross(forward, vec3(0, 1, 0)).normalized();
+        up = vec3::cross(right, forward).normalized();
     }
 
 private:
@@ -158,16 +158,16 @@ private:
     {
         // Calculate forward vector from rotation
         vec3 f;
-        f[0] = std::sin(rotation.y()) * std::cos(rotation.x());
-        f[1] = -std::sin(rotation.x());
-        f[2] = std::cos(rotation.y()) * std::cos(rotation.x());
-        forward = normalize(f);
+        f[0] = std::sin(rotation.y) * std::cos(rotation.x);
+        f[1] = -std::sin(rotation.x);
+        f[2] = std::cos(rotation.y) * std::cos(rotation.x);
+        forward = f.normalized();
 
         // Calculate right vector
-        right = normalize(cross(forward, vec3(0, 1, 0)));
+        right = vec3::cross(forward, vec3(0, 1, 0)).normalized();
 
         // Calculate up vector
-        up = normalize(cross(right, forward));
+        up = vec3::cross(right, forward).normalized();
     }
 };
 

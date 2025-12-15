@@ -126,6 +126,36 @@ transform.setParent(parentTransform);
 auto children = transform.getChildren();
 ```
 
+### Math (vec3 & vec2)
+
+```cpp
+// vec3 - 3D vectors
+vec3 v(x, y, z);
+v.length()            // Magnitude
+v.lengthSquared()     // Faster squared length
+v.normalized()        // Returns unit vector
+
+// Static utility methods
+vec3::dot(a, b)       // Dot product
+vec3::cross(a, b)     // Cross product (3D only)
+vec3::distance(a, b)  // Distance between points
+vec3::reflect(v, n)   // Reflect v across normal n
+vec3::lerp(a, b, t)   // Linear interpolation (0 ≤ t ≤ 1)
+
+// Direct access
+v.x, v.y, v.z         // Named members
+v[0], v[1], v[2]      // Array-style access
+
+// Constants
+vec3::zero, vec3::one, vec3::up, vec3::down
+vec3::forward, vec3::back, vec3::right, vec3::left
+
+// vec2 - 2D vectors (for textures, UI)
+vec2 uv(0.5f, 0.5f);
+uv.length(), uv.normalized()
+vec2::dot(a, b), vec2::distance(a, b)
+```
+
 ### Built-in Meshes
 
 ```cpp

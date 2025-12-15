@@ -1,0 +1,13 @@
+materialType: Hologram
+
+# Color Properties
+color: _Color 0 1 0.5
+
+# Float Properties
+float: _FlickerIntensity 0.1
+float: _ScanlineSpeed 3
+float: _Opacity 0.7
+
+# Int Properties
+int: _UseMainTex 0
+

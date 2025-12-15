@@ -6,10 +6,10 @@
 #define RASTERIZER_H
 
 #include "framebuffer.h"
-#include "Primitives/mesh.h"
-#include "camera.h"
-#include "light.h"
-#include "../Math/mat4.h"
+#include "../Primitives/mesh.h"
+#include "../camera.h"
+#include "../light.h"
+#include "../../Math/mat4.h"
 #include <algorithm>
 #include <cmath>
 
@@ -77,17 +77,17 @@ public:
             transformedPositions.push_back(viewPos);
 
             // Transform normal
-            vec3 worldNormal = normalize(modelMatrix.transformDirection(vertex.normal));
+            vec3 worldNormal = modelMatrix.transformDirection(vertex.normal.normalized());
             transformedNormals.push_back(worldNormal);
 
             // Screen space with proper depth mapping
             // NDC is in range [-1, 1], map depth to [0, 1] for depth buffer
             vec3 ndc = clipPos;
-            float depth = (ndc.z() + 1.0f) * 0.5f; // Map from [-1,1] to [0,1]
+            float depth = (ndc.z + 1.0f) * 0.5f; // Map from [-1,1] to [0,1]
             
             vec3 screen(
-                (ndc.x() + 1.0f) * 0.5f * fb.width,
-                (1.0f - ndc.y()) * 0.5f * fb.height,
+                (ndc.x + 1.0f) * 0.5f * fb.width,
+                (1.0f - ndc.y) * 0.5f * fb.height,
                 depth // Use properly mapped depth
             );
             screenPositions.push_back(screen);
@@ -103,10 +103,10 @@ public:
                 vec3 v1 = screenPositions[tri.v1];
                 vec3 v2 = screenPositions[tri.v2];
 
-                vec3 edge1(v1.x() - v0.x(), v1.y() - v0.y(), 0);
-                vec3 edge2(v2.x() - v0.x(), v2.y() - v0.y(), 0);
+                vec3 edge1(v1.x - v0.x, v1.y - v0.y, 0);
+                vec3 edge2(v2.x - v0.x, v2.y - v0.y, 0);
                 
-                float crossZ = edge1.x() * edge2.y() - edge1.y() * edge2.x();
+                float crossZ = edge1.x * edge2.y - edge1.y * edge2.x;
                 if (crossZ <= 0) continue; // Back-facing
             }
 
@@ -164,23 +164,23 @@ private:
 
     void drawWireframeTriangle(Framebuffer& fb, const vec3& v0, const vec3& v1, const vec3& v2)
     {
-        drawLine(fb, (int)v0.x(), (int)v0.y(), (int)v1.x(), (int)v1.y(), wireframeColor);
-        drawLine(fb, (int)v1.x(), (int)v1.y(), (int)v2.x(), (int)v2.y(), wireframeColor);
-        drawLine(fb, (int)v2.x(), (int)v2.y(), (int)v0.x(), (int)v0.y(), wireframeColor);
+        drawLine(fb, (int)v0.x, (int)v0.y, (int)v1.x, (int)v1.y, wireframeColor);
+        drawLine(fb, (int)v1.x, (int)v1.y, (int)v2.x, (int)v2.y, wireframeColor);
+        drawLine(fb, (int)v2.x, (int)v2.y, (int)v0.x, (int)v0.y, wireframeColor);
     }
 
     // Barycentric coordinates
     vec3 barycentric(const vec3& p, const vec3& a, const vec3& b, const vec3& c)
     {
-        vec3 v0(c.x() - a.x(), b.x() - a.x(), a.x() - p.x());
-        vec3 v1(c.y() - a.y(), b.y() - a.y(), a.y() - p.y());
+        vec3 v0(c.x - a.x, b.x - a.x, a.x - p.x);
+        vec3 v1(c.y - a.y, b.y - a.y, a.y - p.y);
         
-        vec3 u = cross(v0, v1);
+        vec3 u = vec3::cross(v0,  v1);
         
-        if (std::abs(u.z()) < 1.0f)
+        if (std::abs(u.z) < 1.0f)
             return vec3(-1, 1, 1);
         
-        return vec3(1.0f - (u.x() + u.y()) / u.z(), u.y() / u.z(), u.x() / u.z());
+        return vec3(1.0f - (u.x + u.y) / u.z, u.y / u.z, u.x / u.z);
     }
 
     void drawFilledTriangle(Framebuffer& fb,
@@ -191,10 +191,10 @@ private:
                            const Camera& camera, const std::vector<Light>& lights)
     {
         // Bounding box
-        int minX = std::max(0, (int)std::min({v0.x(), v1.x(), v2.x()}));
-        int maxX = std::min(fb.width - 1, (int)std::max({v0.x(), v1.x(), v2.x()}));
-        int minY = std::max(0, (int)std::min({v0.y(), v1.y(), v2.y()}));
-        int maxY = std::min(fb.height - 1, (int)std::max({v0.y(), v1.y(), v2.y()}));
+        int minX = std::max(0, (int)std::min({v0.x, v1.x, v2.x}));
+        int maxX = std::min(fb.width - 1, (int)std::max({v0.x, v1.x, v2.x}));
+        int minY = std::max(0, (int)std::min({v0.y, v1.y, v2.y}));
+        int maxY = std::min(fb.height - 1, (int)std::max({v0.y, v1.y, v2.y}));
 
         // Rasterize
         for (int y = minY; y <= maxY; y++)
@@ -204,18 +204,18 @@ private:
                 vec3 p(x + 0.5f, y + 0.5f, 0);
                 vec3 bc = barycentric(p, v0, v1, v2);
 
-                if (bc.x() < 0 || bc.y() < 0 || bc.z() < 0) continue;
+                if (bc.x < 0 || bc.y < 0 || bc.z < 0) continue;
 
                 // Interpolate depth
-                float depth = bc.x() * v0.z() + bc.y() * v1.z() + bc.z() * v2.z();
+                float depth = bc.x * v0.z + bc.y * v1.z + bc.z * v2.z;
 
                 // Depth test
                 if (depth >= fb.getDepth(x, y)) continue;
 
                 // Interpolate attributes
-                vec3 normal = normalize(bc.x() * n0 + bc.y() * n1 + bc.z() * n2);
-                vec3 worldPos = bc.x() * w0 + bc.y() * w1 + bc.z() * w2;
-                color baseColor = bc.x() * c0 + bc.y() * c1 + bc.z() * c2;
+                vec3 normal = bc.x * n0 + bc.y * n1 + bc.z * n2.normalized();
+                vec3 worldPos = bc.x * w0 + bc.y * w1 + bc.z * w2;
+                color baseColor = bc.x * c0 + bc.y * c1 + bc.z * c2;
 
                 // Apply lighting
                 color finalColor = calculateLighting(worldPos, normal, baseColor, camera.position, lights);
@@ -235,7 +235,7 @@ private:
         color diffuse(0, 0, 0);
         color specular(0, 0, 0);
 
-        vec3 viewDir = normalize(cameraPos - worldPos);
+        vec3 viewDir = cameraPos - worldPos.normalized();
 
         for (const auto& light : lights)
         {
@@ -244,32 +244,32 @@ private:
 
             if (light.type == Light::Type::Directional)
             {
-                lightDir = normalize(-light.direction);
+                lightDir = -light.direction.normalized();
             }
             else if (light.type == Light::Type::Point)
             {
                 vec3 toLight = light.position - worldPos;
-                float distance = toLight.magnitude();
-                lightDir = normalize(toLight);
+                float distance = toLight.length();
+                lightDir = toLight.normalized();
                 attenuation = 1.0f / (1.0f + 0.09f * distance + 0.032f * distance * distance);
             }
 
             // Diffuse
-            float diff = std::max(dot(normal, lightDir), 0.0f);
+            float diff = std::max(vec3::dot(normal,  lightDir), 0.0f);
             diffuse += light.color * light.intensity * diff * attenuation;
 
             // Specular (Blinn-Phong)
-            vec3 halfDir = normalize(lightDir + viewDir);
-            float spec = std::pow(std::max(dot(normal, halfDir), 0.0f), 32.0f);
+            vec3 halfDir = lightDir + viewDir.normalized();
+            float spec = std::pow(std::max(vec3::dot(normal,  halfDir), 0.0f), 32.0f);
             specular += light.color * light.intensity * spec * attenuation * 0.5f;
         }
 
         color result = baseColor * (ambient + diffuse) + specular;
         
         // Clamp to [0, 1]
-        result[0] = std::min(1.0f, std::max(0.0f, result.x()));
-        result[1] = std::min(1.0f, std::max(0.0f, result.y()));
-        result[2] = std::min(1.0f, std::max(0.0f, result.z()));
+        result[0] = std::min(1.0f, std::max(0.0f, result.x));
+        result[1] = std::min(1.0f, std::max(0.0f, result.y));
+        result[2] = std::min(1.0f, std::max(0.0f, result.z));
 
         return result;
     }

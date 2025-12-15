@@ -8,11 +8,12 @@
 #include "gameObject.h"
 #include "../Rendering/camera.h"
 #include "../Rendering/light.h"
-#include "../Rendering/framebuffer.h"
-#include "../Rendering/rasterizer.h"
+#include "../Rendering/Core/framebuffer.h"
+#include "../Rendering/Core/rasterizer.h"
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <functional>
 
 class Scene
 {
@@ -27,6 +28,23 @@ public:
           mainCamera(),
           backgroundColor(0.1f, 0.1f, 0.15f)
     {
+    }
+    
+    // OpenGL initialization callback
+    // Set this callback to initialize materials and other OpenGL resources
+    // It will be called automatically after OpenGL context is created
+    void onOpenGLReady(std::function<void(Scene&)> callback)
+    {
+        openGLReadyCallback = callback;
+    }
+    
+    // Internal: Called by Engine after OpenGL initialization
+    void _invokeOpenGLReady()
+    {
+        if (openGLReadyCallback)
+        {
+            openGLReadyCallback(*this);
+        }
     }
 
     // GameObject management
@@ -125,6 +143,7 @@ public:
 
 private:
     std::vector<std::shared_ptr<GameObject>> gameObjects;
+    std::function<void(Scene&)> openGLReadyCallback;
 };
 
 #endif //SCENE_H

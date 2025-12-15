@@ -40,8 +40,8 @@ public:
         }
 
         file << "SCENE " << scene.name << "\n";
-        file << "BGCOLOR " << scene.backgroundColor.x() << " " 
-             << scene.backgroundColor.y() << " " << scene.backgroundColor.z() << "\n";
+        file << "BGCOLOR " << scene.backgroundColor.x << " " 
+             << scene.backgroundColor.y << " " << scene.backgroundColor.z << "\n";
 
         // Save all game objects
         for (const auto* obj : scene.getAllGameObjects()) {
@@ -53,9 +53,9 @@ public:
             vec3 rot = t.getWorldRotation();
             vec3 scl = t.getWorldScale();
             file << "TR " 
-                 << pos.x() << " " << pos.y() << " " << pos.z() << " "
-                 << rot.x() << " " << rot.y() << " " << rot.z() << " "
-                 << scl.x() << " " << scl.y() << " " << scl.z() << "\n";
+                 << pos.x << " " << pos.y << " " << pos.z << " "
+                 << rot.x << " " << rot.y << " " << rot.z << " "
+                 << scl.x << " " << scl.y << " " << scl.z << "\n";
 
             // Save mesh if MeshFilter component exists
             auto meshFilter = obj->getComponent<MeshFilter>();

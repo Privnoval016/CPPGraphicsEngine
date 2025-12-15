@@ -1,0 +1,19 @@
+materialType: Toon
+
+# Color Properties
+color: _Color 1 0.3 0
+
+# Float Properties
+float: _OcclusionStrength 1
+float: _BumpScale 1
+float: _Smoothness 0.1
+float: _Glossiness 0.5
+float: _Metallic 0
+
+# Int Properties
+int: _ToonSteps 4
+int: _UseOcclusionMap 0
+int: _UseBumpMap 0
+int: _UseMetallicMap 0
+int: _UseMainTex 0
+

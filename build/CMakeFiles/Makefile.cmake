@@ -61,4 +61,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Game.dir/DependInfo.cmake"
   "CMakeFiles/MaterialDemo.dir/DependInfo.cmake"
+  "CMakeFiles/AssetDemo.dir/DependInfo.cmake"
+  "CMakeFiles/ModelTest.dir/DependInfo.cmake"
+  "CMakeFiles/CustomMaterialDemo.dir/DependInfo.cmake"
   )

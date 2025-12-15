@@ -7,9 +7,9 @@
 
 #include "scene.h"
 #include "Systems/input.h"
-#include "../Rendering/framebuffer.h"
-#include "../Rendering/rasterizer.h"
-#include "../Rendering/window.h"
+#include "../Rendering/Core/framebuffer.h"
+#include "../Rendering/Core/rasterizer.h"
+#include "../Rendering/Core/window.h"
 #include <chrono>
 #include <iostream>
 #include <memory>

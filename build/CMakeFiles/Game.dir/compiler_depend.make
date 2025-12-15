@@ -778,22 +778,32 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/default_shaders.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/framebuffer.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/material.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/rasterizer.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/rasterizer.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/window.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/texture.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/window.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/builtin_materials.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec2.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/behaviour.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/component.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/transformComponent.h \
@@ -816,21 +826,28 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/gameObject.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/scene.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec2.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_renderer.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_window.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/rasterizer.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/window.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/texture.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/modelLoader.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/stb_image.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/textureLoader.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/builtin_materials.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/materialSerializer.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/default_shaders.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/builtin_materials.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/framebuffer.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/material.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/opengl_renderer.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/opengl_window.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/rasterizer.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/texture.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/window.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/GraphicsEngine.h \
   /opt/homebrew/Cellar/sdl2/2.32.10/include/SDL2/SDL.h \
   /opt/homebrew/Cellar/sdl2/2.32.10/include/SDL2/SDL_assert.h \
@@ -942,6 +959,16 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /opt/homebrew/Cellar/sdl2/2.32.10/include/SDL2/SDL.h:
 
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/textureLoader.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/modelLoader.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_window.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_n.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_renderer.h:
+
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/gameEngine.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/minmax.h:
@@ -958,9 +985,17 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/component.h:
 
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h:
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/builtin_materials.h:
 
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_fill.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdio.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/rasterizer.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/weak_result_type.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/replace.h:
 
@@ -969,6 +1004,10 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_set_symmetric_difference.h:
 
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h:
 
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Assets/Scripts/cameraController.h:
 
@@ -1330,8 +1369,6 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_pointer.h:
 
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/opengl_window.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/move_backward.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_const.h:
@@ -1361,10 +1398,6 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 /opt/homebrew/Cellar/sdl2/2.32.10/include/SDL2/SDL_power.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_trivially_move_constructible.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/in_in_result.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/material.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/iterator.h:
 
@@ -1626,8 +1659,6 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/is_valid.h:
 
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/rasterizer.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_reference.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex_base:
@@ -1874,10 +1905,6 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/totally_ordered.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/endian.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/window.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/semiregular.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/in_place.h:
@@ -1925,6 +1952,8 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_push_heap.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/common_comparison_category.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/endian.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/time_point.h:
 
@@ -2066,10 +2095,6 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_sort.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_fill.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdio.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partial_sort.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/is_permutation.h:
@@ -2087,10 +2112,6 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/lower_bound.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/counted_iterator.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/destructible.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/framebuffer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_backward.h:
 
@@ -2153,8 +2174,6 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_all_of.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_unsigned.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/weak_result_type.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_set_union.h:
 
@@ -2278,6 +2297,8 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_wctrans_t.h:
 
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/stb_image.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/stable_sort.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_move_backward.h:
@@ -2311,8 +2332,6 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/view_interface.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_all_extents.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_n.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unique.h:
 
@@ -2354,21 +2373,19 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/directory_iterator.h:
 
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/builtin_materials.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/set_intersection.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/make_heap.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/make_projected.h:
 
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/opengl_renderer.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/bounded_iter.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/raw_storage_iterator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/mismatch.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/prev_permutation.h:
 
@@ -2484,6 +2501,8 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/count.h:
 
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/window.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/in_found_result.h:
 
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Assets/Scripts/rotator.h:
@@ -2510,6 +2529,8 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/search.h:
 
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec2.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/endian.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uintmax_t.h:
@@ -2531,6 +2552,10 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sort.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/shared_ptr.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/materialSerializer.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/in_in_result.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_reverse_copy.h:
 
@@ -2567,6 +2592,8 @@ CMakeFiles/Game.dir/main.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphics
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_search.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_limits.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/destructible.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/__wctype.h:
 

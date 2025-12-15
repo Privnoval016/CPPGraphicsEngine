@@ -203,12 +203,29 @@ Engine::runOpenGL(scene, width, height, title, fps, onOpenGLReady);
 
 ```cpp
 vec3 v(x, y, z);
+
+// Member methods
 v.length()           // Magnitude
-v.normalized()       // Unit vector
-vec3::dot(a, b)     // Dot product
-vec3::cross(a, b)   // Cross product
-v + u, v - u        // Vector arithmetic
-v * scalar          // Scalar multiplication
+v.lengthSquared()    // Squared magnitude (faster)
+v.normalized()       // Returns unit vector
+
+// Static utility methods
+vec3::dot(a, b)      // Dot product
+vec3::cross(a, b)    // Cross product
+vec3::distance(a, b) // Distance between vectors
+vec3::reflect(v, n)  // Reflect v across normal n
+vec3::lerp(a, b, t)  // Linear interpolation
+
+// Operators
+v + u, v - u         // Vector arithmetic
+v * scalar           // Scalar multiplication
+v[0], v[1], v[2]     // Component access (or v.x, v.y, v.z)
+
+// Constants
+vec3::zero, vec3::one
+vec3::up, vec3::down
+vec3::forward, vec3::back
+vec3::right, vec3::left
 ```
 
 ### mat4 - 4x4 Matrices

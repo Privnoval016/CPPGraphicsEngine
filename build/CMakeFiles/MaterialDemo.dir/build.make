@@ -72,28 +72,28 @@ include CMakeFiles/MaterialDemo.dir/flags.make
 CMakeFiles/MaterialDemo.dir/codegen:
 .PHONY : CMakeFiles/MaterialDemo.dir/codegen
 
-CMakeFiles/MaterialDemo.dir/material_demo.cpp.o: CMakeFiles/MaterialDemo.dir/flags.make
-CMakeFiles/MaterialDemo.dir/material_demo.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/material_demo.cpp
-CMakeFiles/MaterialDemo.dir/material_demo.cpp.o: CMakeFiles/MaterialDemo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MaterialDemo.dir/material_demo.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MaterialDemo.dir/material_demo.cpp.o -MF CMakeFiles/MaterialDemo.dir/material_demo.cpp.o.d -o CMakeFiles/MaterialDemo.dir/material_demo.cpp.o -c /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/material_demo.cpp
+CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o: CMakeFiles/MaterialDemo.dir/flags.make
+CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o: /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Demos/material_demo.cpp
+CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o: CMakeFiles/MaterialDemo.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o -MF CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o.d -o CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o -c /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Demos/material_demo.cpp
 
-CMakeFiles/MaterialDemo.dir/material_demo.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MaterialDemo.dir/material_demo.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/material_demo.cpp > CMakeFiles/MaterialDemo.dir/material_demo.cpp.i
+CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Demos/material_demo.cpp > CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.i
 
-CMakeFiles/MaterialDemo.dir/material_demo.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MaterialDemo.dir/material_demo.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/material_demo.cpp -o CMakeFiles/MaterialDemo.dir/material_demo.cpp.s
+CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Demos/material_demo.cpp -o CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.s
 
 # Object files for target MaterialDemo
 MaterialDemo_OBJECTS = \
-"CMakeFiles/MaterialDemo.dir/material_demo.cpp.o"
+"CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o"
 
 # External object files for target MaterialDemo
 MaterialDemo_EXTERNAL_OBJECTS =
 
-MaterialDemo: CMakeFiles/MaterialDemo.dir/material_demo.cpp.o
+MaterialDemo: CMakeFiles/MaterialDemo.dir/Demos/material_demo.cpp.o
 MaterialDemo: CMakeFiles/MaterialDemo.dir/build.make
 MaterialDemo: /opt/homebrew/Cellar/sdl2/2.32.10/lib/libSDL2.dylib
 MaterialDemo: CMakeFiles/MaterialDemo.dir/link.txt

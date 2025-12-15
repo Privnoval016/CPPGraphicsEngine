@@ -135,6 +135,31 @@ Scene loadedScene = SceneSerializer::loadSceneFromAssets("Level1");
 Engine::runOpenGL(loadedScene);
 ```
 
+### Math (vec3)
+
+```cpp
+vec3 v(1, 2, 3);
+
+// Member methods
+v.length()            // Magnitude
+v.lengthSquared()     // Faster than length()
+v.normalized()        // Unit vector
+
+// Static methods
+vec3::dot(a, b)       // Dot product
+vec3::cross(a, b)     // Cross product
+vec3::distance(a, b)  // Distance between
+vec3::lerp(a, b, t)   // Linear interpolation
+
+// Direct member access
+v.x, v.y, v.z         // Direct access
+v[0], v[1], v[2]      // Array-style access
+
+// Constants
+vec3::zero, vec3::one
+vec3::up, vec3::forward, vec3::right
+```
+
 ## Features
 
 ✅ Hardware-accelerated OpenGL rendering (60+ FPS)  

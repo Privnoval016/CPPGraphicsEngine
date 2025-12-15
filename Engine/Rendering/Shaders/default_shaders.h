@@ -113,12 +113,12 @@ void main()
         }
         
         // Diffuse lighting (Lambert's cosine law)
-        float diff = max(dot(norm, lightDir), 0.0);
+        float diff = max(dot(norm,  lightDir), 0.0);
         diffuse += lights[i].color * lights[i].intensity * diff * attenuation * VertexColor;
         
         // Specular lighting (Blinn-Phong)
         vec3 halfDir = normalize(lightDir + viewDir);
-        float spec = pow(max(dot(norm, halfDir), 0.0), shininess);
+        float spec = pow(max(dot(norm,  halfDir), 0.0), shininess);
         specular += lights[i].color * lights[i].intensity * spec * attenuation * specularStrength;
     }
     

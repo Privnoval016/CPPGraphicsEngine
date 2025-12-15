@@ -1,0 +1,7 @@
+# Red Metallic Material
+# PBR material with high metallic value
+
+materialType: Standard
+color: _Color 0.9 0.1 0.1
+float: _Metallic 0.9
+float: _Smoothness 0.85

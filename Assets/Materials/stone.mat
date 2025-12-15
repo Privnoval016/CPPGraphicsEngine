@@ -1,0 +1,7 @@
+# Rough Stone Material
+# Non-metallic with low smoothness
+
+materialType: Standard
+color: _Color 0.5 0.5 0.5
+float: _Metallic 0.0
+float: _Smoothness 0.2

@@ -89,10 +89,10 @@ public:
     {
         angle += speed * deltaTime;
         
-        float x = center.x() + radius * std::cos(angle);
-        float z = center.z() + radius * std::sin(angle);
+        float x = center.x + radius * std::cos(angle);
+        float z = center.z + radius * std::sin(angle);
         
-        setPosition(vec3(x, center.y(), z));
+        setPosition(vec3(x, center.y, z));
     }
 };
 

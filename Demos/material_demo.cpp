@@ -2,11 +2,9 @@
 // Material Demo - Showcases Unity-like material system
 //
 
-#include "GraphicsEngine.h"
-#include "Engine/Rendering/builtin_materials.h"
-#include "Engine/Rendering/texture.h"
-#include "Assets/Scripts/rotator.h"
-#include "Assets/Scripts/cameraController.h"
+#include "../GraphicsEngine.h"
+#include "../Assets/Scripts/rotator.h"
+#include "../Assets/Scripts/cameraController.h"
 #include <cmath>
 
 int main()
@@ -105,9 +103,8 @@ int main()
     std::cout << "  Left Ctrl - Sprint" << std::endl;
     std::cout << "  ESC - Exit\n" << std::endl;
 
-    // Run engine with OpenGL-ready callback
-    Engine::runOpenGL(scene, 1280, 720, "CPP Graphics Engine - Material System", 60, 
-        [&](Scene& s) {
+    // Set up materials after OpenGL initialization
+    scene.onOpenGLReady([&](Scene& s) {
             std::cout << "OpenGL context ready - Creating materials..." << std::endl;
             
             // Ground material (dark gray, slightly rough)
@@ -167,6 +164,9 @@ int main()
             
             std::cout << "Materials created successfully!" << std::endl;
         });
+
+    // Run engine
+    Engine::runOpenGL(scene, 1280, 720, "CPP Graphics Engine - Material System", 60);
 
     return 0;
 }
