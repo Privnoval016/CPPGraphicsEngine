@@ -1,8 +1,3 @@
-//
-// Behaviour - Components with enable/disable and lifecycle methods
-// Unity architecture: Component -> Behaviour -> MonoBehaviour
-//
-
 #ifndef ENGINE_BEHAVIOUR_H
 #define ENGINE_BEHAVIOUR_H
 
@@ -21,22 +16,26 @@
  */
 class Behaviour : public Component
 {
+    friend class GameObject;  // Allow GameObject to call protected lifecycle methods
+
 public:
     bool enabled;
 
     Behaviour() : Component(), enabled(true) {}
     virtual ~Behaviour() = default;
 
+    // Enable/disable control
+    void setEnabled(bool value) { enabled = value; }
+    bool isEnabled() const { return enabled; }
+
+protected:
     // Lifecycle methods - override in derived classes
+    // Protected to prevent external calls, only GameObject can invoke these
     virtual void awake() {}
     virtual void start() {}
     virtual void update(float deltaTime) {}
     virtual void lateUpdate(float deltaTime) {}
     virtual void onDestroy() {}
-
-    // Enable/disable control
-    void setEnabled(bool value) { enabled = value; }
-    bool isEnabled() const { return enabled; }
 };
 
 #endif //ENGINE_BEHAVIOUR_H

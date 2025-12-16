@@ -1,13 +1,16 @@
-//
-// Created by Graphics Engine
-//
-
 #ifndef INPUT_H
 #define INPUT_H
 
 #include <SDL2/SDL.h>
 #include <unordered_map>
 
+/**
+ * @class Input
+ * @brief Singleton class for handling keyboard and mouse input
+ * 
+ * Provides methods to query the current and previous state of keys and mouse buttons.
+ * Supports key down/up events and mouse position/delta tracking.
+ */
 class Input
 {
 public:

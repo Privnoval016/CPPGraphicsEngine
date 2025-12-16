@@ -1,8 +1,3 @@
-//
-// Component - Base class for all components that can be attached to GameObjects
-// Unity architecture: Component -> Behaviour -> MonoBehaviour
-//
-
 #ifndef ENGINE_COMPONENT_H
 #define ENGINE_COMPONENT_H
 
@@ -23,8 +18,6 @@ public:
 
     Component() : gameObject(nullptr) {}
     virtual ~Component() = default;
-
-    // No lifecycle methods here - those are in Behaviour
 };
 
 #endif //ENGINE_COMPONENT_H

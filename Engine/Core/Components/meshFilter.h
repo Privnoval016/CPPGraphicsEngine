@@ -1,7 +1,3 @@
-//
-// MeshFilter Component - Holds mesh data (Unity-like)
-//
-
 #ifndef MESHFILTER_H
 #define MESHFILTER_H
 
@@ -13,7 +9,7 @@
  * @class MeshFilter
  * @brief Component that holds a reference to a mesh
  * 
- * Separates mesh data from rendering logic (like Unity).
+ * Separates mesh data from rendering logic.
  * Used together with MeshRenderer component.
  */
 class MeshFilter : public Component

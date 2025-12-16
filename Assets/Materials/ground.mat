@@ -1,0 +1,22 @@
+materialType: Ground
+
+# Color Properties
+color: _Color 1 1 1
+
+# Float Properties
+float: _OcclusionStrength 1
+float: _BumpScale 0.3
+float: _Smoothness 0.3
+float: _Glossiness 0.5
+float: _Metallic 0.1
+
+# Int Properties
+int: _UseOcclusionMap 0
+int: _UseBumpMap 1
+int: _UseMetallicMap 1
+int: _UseMainTex 1
+
+# Texture Properties
+texture: _BumpMap Assets/Textures/Ground/GroundDisplacement.png
+texture: _MetallicGlossMap Assets/Textures/Ground/GroundSpecular.png
+texture: _MainTex Assets/Textures/Ground/GroundDiffuse.jpg

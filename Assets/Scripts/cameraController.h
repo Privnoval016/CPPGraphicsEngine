@@ -5,11 +5,7 @@
 #ifndef CAMERA_CONTROLLER_H
 #define CAMERA_CONTROLLER_H
 
-#include "../../Engine/Core/Components/monoBehaviour.h"
-#include "../../Engine/Core/Components/cameraComponent.h"
-#include "../../Engine/Core/Systems/input.h"
-#include "../../Engine/Math/vec3.h"
-#include <SDL2/SDL.h>
+#include "../../EngineAPI.h"
 #include <cmath>
 
 /**
@@ -69,7 +65,6 @@ public:
             transform().translate(velocity * speed * deltaTime);
         }
 
-        // Look (always active for first-person feel)
         {
             // Enable relative mouse mode on first frame
             static bool initialized = false;

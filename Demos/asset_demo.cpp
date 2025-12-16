@@ -85,12 +85,44 @@ int main()
     scene.onOpenGLReady([&](Scene& s) {
             std::cout << "OpenGL context ready - Loading materials from files..." << std::endl;
             
-            // Load materials from files
+            // Load materials from files (may return nullptr if files don't exist)
             auto redMetal = MaterialSerializer::loadFromFile("Assets/Materials/red_metal.mat");
             auto gold = MaterialSerializer::loadFromFile("Assets/Materials/gold.mat");
             auto greenPlastic = MaterialSerializer::loadFromFile("Assets/Materials/green_plastic.mat");
             auto blueEmissive = MaterialSerializer::loadFromFile("Assets/Materials/blue_emissive.mat");
             auto stone = MaterialSerializer::loadFromFile("Assets/Materials/stone.mat");
+            
+            // Create fallback materials if files don't exist
+            if (!redMetal) {
+                redMetal = BuiltinMaterials::createStandard();
+                redMetal->setColor("_Color", color(0.8f, 0.1f, 0.1f));
+                redMetal->setFloat("_Metallic", 0.8f);
+                redMetal->setFloat("_Smoothness", 0.7f);
+            }
+            if (!gold) {
+                gold = BuiltinMaterials::createStandard();
+                gold->setColor("_Color", color(1.0f, 0.8f, 0.2f));
+                gold->setFloat("_Metallic", 1.0f);
+                gold->setFloat("_Smoothness", 0.9f);
+            }
+            if (!greenPlastic) {
+                greenPlastic = BuiltinMaterials::createStandard();
+                greenPlastic->setColor("_Color", color(0.1f, 0.8f, 0.2f));
+                greenPlastic->setFloat("_Metallic", 0.0f);
+                greenPlastic->setFloat("_Smoothness", 0.6f);
+            }
+            if (!blueEmissive) {
+                blueEmissive = BuiltinMaterials::createStandard();
+                blueEmissive->setColor("_Color", color(0.2f, 0.4f, 1.0f));
+                blueEmissive->setFloat("_Metallic", 0.0f);
+                blueEmissive->setFloat("_Smoothness", 0.9f);
+            }
+            if (!stone) {
+                stone = BuiltinMaterials::createStandard();
+                stone->setColor("_Color", color(0.5f, 0.5f, 0.5f));
+                stone->setFloat("_Metallic", 0.1f);
+                stone->setFloat("_Smoothness", 0.3f);
+            }
             
             // Apply materials to objects
             if (pyramidMesh) {
@@ -124,12 +156,43 @@ int main()
                 cubeRenderer->setMaterial(redMetal);
             }
             
-            // Ground material
+            // Ground material - PBR with textures
             auto groundMat = BuiltinMaterials::createStandard();
-            groundMat->setColor("_Color", color(0.3f, 0.3f, 0.3f));
-            groundMat->setFloat("_Metallic", 0.0f);
-            groundMat->setFloat("_Smoothness", 0.4f);
+            
+            // Load ground textures with path tracking
+            std::string diffusePath = "Assets/Textures/Ground/GroundDiffuse.jpg";
+            std::string specularPath = "Assets/Textures/Ground/GroundSpecular.png";
+            std::string displacementPath = "Assets/Textures/Ground/GroundDisplacement.png";
+            
+            auto groundDiffuse = TextureLoader::loadFromFile(diffusePath);
+            auto groundSpecular = TextureLoader::loadFromFile(specularPath);
+            auto groundDisplacement = TextureLoader::loadFromFile(displacementPath);
+            
+            if (groundDiffuse) {
+                groundMat->setTexture("_MainTex", groundDiffuse, diffusePath);
+                // Flag is set automatically by setTexture()
+            }
+            if (groundSpecular) {
+                // Use specular map as metallic/smoothness map
+                groundMat->setTexture("_MetallicGlossMap", groundSpecular, specularPath);
+                // Flag is set automatically by setTexture()
+            }
+            if (groundDisplacement) {
+                // Use displacement as bump/normal map
+                groundMat->setTexture("_BumpMap", groundDisplacement, displacementPath);
+                groundMat->setFloat("_BumpScale", 0.3f);
+                // Flag is set automatically by setTexture()
+            }
+            
+            groundMat->setName("Ground");
+            groundMat->setColor("_Color", color(1.0f, 1.0f, 1.0f)); // White tint to show texture colors
+            groundMat->setFloat("_Metallic", 0.1f);
+            groundMat->setFloat("_Smoothness", 0.3f);
             groundRenderer->setMaterial(groundMat);
+            
+            // Save ground material to file for reuse
+            MaterialSerializer::saveToFile(*groundMat, "Assets/Materials/ground.mat");
+            std::cout << "Ground material saved to Assets/Materials/ground.mat" << std::endl;
             
             std::cout << "Materials loaded successfully!" << std::endl;
             std::cout << "\nObjects in scene:" << std::endl;

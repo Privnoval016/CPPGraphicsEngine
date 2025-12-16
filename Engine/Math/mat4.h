@@ -1,7 +1,3 @@
-//
-// Created by Graphics Engine
-//
-
 #ifndef MAT4_H
 #define MAT4_H
 
@@ -9,9 +5,13 @@
 #include <cmath>
 #include <iostream>
 
-// Forward declaration
-class vec4;
-
+/**
+ * @class mat4
+ * @brief 4x4 matrix for 3D transformations
+ * 
+ * Provides common matrix operations and factory methods for
+ * translation, rotation, scaling, and projection matrices.
+ */
 class mat4
 {
 public:

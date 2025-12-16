@@ -13,6 +13,10 @@
 #include <algorithm>
 #include <cmath>
 
+/**
+ * @struct Fragment
+ * @brief Represents a fragment (pixel candidate) during rasterization
+ */
 struct Fragment
 {
     vec3 position;
@@ -22,9 +26,17 @@ struct Fragment
     float depth;
 };
 
+/**
+ * @class Rasterizer
+ * @brief Software rasterizer for rendering 3D meshes onto a framebuffer
+ */
 class Rasterizer
 {
 public:
+    /** 
+     * @enum RenderMode
+     * @brief Different rendering modes for the rasterizer
+     */
     enum class RenderMode
     {
         Wireframe,
@@ -36,12 +48,22 @@ public:
     bool backfaceCulling;
     color wireframeColor;
 
+    /**
+     * @brief Construct a new Rasterizer object
+     */
     Rasterizer()
         : renderMode(RenderMode::Solid),
           backfaceCulling(true),
           wireframeColor(1, 1, 1) {}
 
-    // Draw a single mesh
+    /**
+     * @brief Draw a mesh onto the framebuffer
+     * @param fb Framebuffer to draw onto
+     * @param mesh Mesh to render
+     * @param modelMatrix Model transformation matrix
+     * @param camera Camera for view and projection
+     * @param lights Scene lights for shading
+     */
     void drawMesh(Framebuffer& fb, const Mesh& mesh, const mat4& modelMatrix, 
                   const Camera& camera, const std::vector<Light>& lights)
     {
@@ -134,6 +156,7 @@ public:
 
 private:
     // Bresenham's line algorithm
+    // https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
     void drawLine(Framebuffer& fb, int x0, int y0, int x1, int y1, const color& col)
     {
         int dx = std::abs(x1 - x0);
@@ -231,9 +254,9 @@ private:
         if (lights.empty())
             return baseColor;
 
-        color ambient = color(0.1f, 0.1f, 0.1f);
-        color diffuse(0, 0, 0);
-        color specular(0, 0, 0);
+        color ambient = color(0.1f, 0.1f, 0.1f); // Ambient light: what little light is always present
+        color diffuse(0, 0, 0); // Diffuse light: light scattered in many directions
+        color specular(0, 0, 0); // Specular light: shiny highlights
 
         vec3 viewDir = cameraPos - worldPos.normalized();
 

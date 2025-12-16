@@ -45,6 +45,7 @@ private:
     std::unordered_map<std::string, vec3> vectorProperties;
     std::unordered_map<std::string, color> colorProperties;
     std::unordered_map<std::string, std::shared_ptr<Texture>> textureProperties;
+    std::unordered_map<std::string, std::string> texturePaths;  // Track texture file paths for serialization
     std::unordered_map<std::string, int> intProperties;
     
     // Default white texture for unbound samplers (prevents OpenGL warnings)
@@ -107,6 +108,40 @@ public:
     void setTexture(const std::string& propertyName, std::shared_ptr<Texture> texture)
     {
         textureProperties[propertyName] = texture;
+        
+        // Automatically enable texture usage flags for common samplers
+        if (propertyName == "_MainTex") {
+            setInt("_UseMainTex", texture && texture->isLoaded() ? 1 : 0);
+        } else if (propertyName == "_MetallicGlossMap") {
+            setInt("_UseMetallicMap", texture && texture->isLoaded() ? 1 : 0);
+        } else if (propertyName == "_BumpMap") {
+            setInt("_UseBumpMap", texture && texture->isLoaded() ? 1 : 0);
+        } else if (propertyName == "_OcclusionMap") {
+            setInt("_UseOcclusionMap", texture && texture->isLoaded() ? 1 : 0);
+        }
+    }
+
+    void setTexture(const std::string& propertyName, std::shared_ptr<Texture> texture, const std::string& filepath)
+    {
+        textureProperties[propertyName] = texture;
+        texturePaths[propertyName] = filepath;
+        
+        // Automatically enable texture usage flags for common samplers
+        if (propertyName == "_MainTex") {
+            setInt("_UseMainTex", texture && texture->isLoaded() ? 1 : 0);
+        } else if (propertyName == "_MetallicGlossMap") {
+            setInt("_UseMetallicMap", texture && texture->isLoaded() ? 1 : 0);
+        } else if (propertyName == "_BumpMap") {
+            setInt("_UseBumpMap", texture && texture->isLoaded() ? 1 : 0);
+        } else if (propertyName == "_OcclusionMap") {
+            setInt("_UseOcclusionMap", texture && texture->isLoaded() ? 1 : 0);
+        }
+    }
+
+    std::string getTexturePath(const std::string& propertyName) const
+    {
+        auto it = texturePaths.find(propertyName);
+        return (it != texturePaths.end()) ? it->second : "";
     }
 
     // ==================== Property Getters ====================
@@ -190,30 +225,26 @@ public:
             shader->setColor(name, value);
         }
 
-        // Apply texture properties
+        // Apply texture properties - only bind textures that are actually set
         int textureUnit = 0;
         
-        // List of common texture samplers (bind default texture if not set)
-        std::vector<std::string> samplerNames = {
-            "_MainTex", "_MetallicGlossMap", "_BumpMap", "_OcclusionMap"
-        };
-        
-        for (const std::string& samplerName : samplerNames)
+        for (const auto& [name, texture] : textureProperties)
         {
-            auto it = textureProperties.find(samplerName);
-            if (it != textureProperties.end() && it->second && it->second->isLoaded())
+            // Add extra safety checks to prevent segfaults
+            if (texture)
             {
-                // Use custom texture
-                it->second->bind(textureUnit);
-                shader->setInt(samplerName, textureUnit);
+                try {
+                    if (texture->isLoaded())
+                    {
+                        texture->bind(textureUnit);
+                        shader->setInt(name, textureUnit);
+                        textureUnit++;
+                    }
+                } catch (...) {
+                    // Skip this texture if binding fails
+                    continue;
+                }
             }
-            else
-            {
-                // Bind default white texture to prevent warnings
-                getDefaultTexture()->bind(textureUnit);
-                shader->setInt(samplerName, textureUnit);
-            }
-            textureUnit++;
         }
     }
 
@@ -250,6 +281,7 @@ public:
     const std::unordered_map<std::string, vec3>& getVectorProperties() const { return vectorProperties; }
     const std::unordered_map<std::string, color>& getColorProperties() const { return colorProperties; }
     const std::unordered_map<std::string, std::shared_ptr<Texture>>& getTextureProperties() const { return textureProperties; }
+    const std::unordered_map<std::string, std::string>& getTexturePaths() const { return texturePaths; }
     const std::unordered_map<std::string, int>& getIntProperties() const { return intProperties; }
 };
 

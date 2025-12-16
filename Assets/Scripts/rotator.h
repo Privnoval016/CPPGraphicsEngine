@@ -5,8 +5,7 @@
 #ifndef ROTATOR_H
 #define ROTATOR_H
 
-#include "../../Engine/Core/Components/monoBehaviour.h"
-#include "../../Engine/Math/vec3.h"
+#include "../../EngineAPI.h"
 #include <cmath>
 
 // Example MonoBehaviour that rotates an object

@@ -1,7 +1,3 @@
-//
-// TransformComponent - Position, rotation, scale with parent-child hierarchy
-//
-
 #ifndef ENGINE_TRANSFORM_COMPONENT_H
 #define ENGINE_TRANSFORM_COMPONENT_H
 
@@ -66,7 +62,7 @@ private:
             
             // Extract world position, rotation, scale from matrix
             // For simplicity, we'll just use the local values scaled by parent
-            // (Full decomposition is complex and rarely needed)
+            // (should use full decomposition for accurate extraction but i am lazy)
             cachedWorldPosition = parentTransform->getWorldPosition() + localPosition;
             cachedWorldRotation = parentTransform->getWorldRotation() + localRotation;
             cachedWorldScale = vec3(
@@ -75,7 +71,7 @@ private:
                 parentTransform->getWorldScale().z * localScale.z
             );
         } else {
-            // No parent - world = local
+            // No parent: world = local
             cachedWorldPosition = localPosition;
             cachedWorldRotation = localRotation;
             cachedWorldScale = localScale;
@@ -171,7 +167,7 @@ public:
         return children.size();
     }
 
-    // ===== Local Space (relative to parent) =====
+    // Local Space (relative to parent)
 
     vec3 getLocalPosition() const { return localPosition; }
     vec3 getLocalRotation() const { return localRotation; }
@@ -195,7 +191,7 @@ public:
         markDirty();
     }
 
-    // ===== World Space =====
+    // World Space (relative to world origin)
 
     vec3 getWorldPosition() const
     {
@@ -244,7 +240,7 @@ public:
         markDirty();
     }
 
-    // ===== Convenience Methods =====
+    // Convenience Methods
 
     /**
      * @brief Get model matrix (for rendering)

@@ -8,8 +8,10 @@
 #include "../../Math/vec3.h"
 #include "../../Math/vec2.h"
 #include "../color.h"
+#include "../Core/render_types.h"
 #include <vector>
 #include <memory>
+#include <atomic>
 
 struct Vertex
 {
@@ -38,16 +40,62 @@ struct Triangle
 
 class Mesh
 {
+private:
+    static std::atomic<uint64_t> nextMeshID;
+    uint64_t meshID;
+    bool isDirty;
+    BufferUsage usage;
+    
 public:
     std::vector<Vertex> vertices;
     std::vector<Triangle> triangles;
 
-    Mesh() = default;
+    Mesh(BufferUsage bufferUsage = BufferUsage::Static) 
+        : meshID(++nextMeshID), isDirty(true), usage(bufferUsage)
+    {
+    }
+    
+    /**
+     * @brief Get unique mesh identifier
+     */
+    uint64_t getID() const { return meshID; }
+    
+    /**
+     * @brief Check if mesh data has changed since last upload
+     */
+    bool getDirty() const { return isDirty; }
+    
+    /**
+     * @brief Mark mesh as clean (called by renderer after upload)
+     */
+    void clearDirty() { isDirty = false; }
+    
+    /**
+     * @brief Mark mesh as dirty (needs re-upload)
+     */
+    void markDirty() { isDirty = true; }
+    
+    /**
+     * @brief Get buffer usage hint
+     */
+    BufferUsage getUsage() const { return usage; }
+    
+    /**
+     * @brief Set buffer usage hint (marks dirty)
+     */
+    void setUsage(BufferUsage newUsage)
+    {
+        if (usage != newUsage)
+        {
+            usage = newUsage;
+            isDirty = true;
+        }
+    }
 
     // Create a cube mesh
-    static std::shared_ptr<Mesh> createCube(float size = 1.0f)
+    static std::shared_ptr<Mesh> createCube(float size = 1.0f, BufferUsage usage = BufferUsage::Static)
     {
-        auto mesh = std::make_shared<Mesh>();
+        auto mesh = std::make_shared<Mesh>(usage);
         float half = size * 0.5f;
 
         // 8 vertices of a cube
@@ -109,31 +157,56 @@ public:
     }
 
     // Create a plane mesh
-    static std::shared_ptr<Mesh> createPlane(float width = 10.0f, float height = 10.0f)
+    static std::shared_ptr<Mesh> createPlane(float width = 10.0f, float height = 10.0f, BufferUsage usage = BufferUsage::Static)
     {
-        auto mesh = std::make_shared<Mesh>();
+        auto mesh = std::make_shared<Mesh>(usage);
         float hw = width * 0.5f;
         float hh = height * 0.5f;
 
-        mesh->vertices = {
-            Vertex(vec3(-hw, 0, -hh), vec3(0, 1, 0), vec3(0, 0, 0), color(0.7f, 0.7f, 0.7f)),
-            Vertex(vec3(hw, 0, -hh), vec3(0, 1, 0), vec3(1, 0, 0), color(0.7f, 0.7f, 0.7f)),
-            Vertex(vec3(hw, 0, hh), vec3(0, 1, 0), vec3(1, 1, 0), color(0.7f, 0.7f, 0.7f)),
-            Vertex(vec3(-hw, 0, hh), vec3(0, 1, 0), vec3(0, 1, 0), color(0.7f, 0.7f, 0.7f))
-        };
-
-        mesh->triangles = {
-            Triangle(0, 1, 2),  // CCW from above
-            Triangle(0, 2, 3)   // CCW from above
-        };
+        // Create a subdivided plane (2x2 grid = 4 quads = 8 triangles)
+        // This eliminates the visible seam artifact from single-quad planes
+        const int subdivisionsX = 2;
+        const int subdivisionsZ = 2;
+        
+        // Generate vertices
+        for (int z = 0; z <= subdivisionsZ; z++)
+        {
+            for (int x = 0; x <= subdivisionsX; x++)
+            {
+                float px = -hw + (x * width / subdivisionsX);
+                float pz = -hh + (z * height / subdivisionsZ);
+                float u = x / (float)subdivisionsX;
+                float v = z / (float)subdivisionsZ;
+                
+                mesh->vertices.push_back(
+                    Vertex(vec3(px, 0, pz), vec3(0, 1, 0), vec3(u, v, 0), color(1.0f, 1.0f, 1.0f))
+                );
+            }
+        }
+        
+        // Generate triangles (2 per quad)
+        for (int z = 0; z < subdivisionsZ; z++)
+        {
+            for (int x = 0; x < subdivisionsX; x++)
+            {
+                int i0 = z * (subdivisionsX + 1) + x;
+                int i1 = i0 + 1;
+                int i2 = i0 + (subdivisionsX + 1);
+                int i3 = i2 + 1;
+                
+                // CCW winding from above
+                mesh->triangles.push_back(Triangle(i0, i1, i2));
+                mesh->triangles.push_back(Triangle(i1, i3, i2));
+            }
+        }
 
         return mesh;
     }
 
     // Create a sphere mesh (icosphere approximation)
-    static std::shared_ptr<Mesh> createSphere(float radius = 1.0f, int subdivisions = 2)
+    static std::shared_ptr<Mesh> createSphere(float radius = 1.0f, int subdivisions = 2, BufferUsage usage = BufferUsage::Static)
     {
-        auto mesh = std::make_shared<Mesh>();
+        auto mesh = std::make_shared<Mesh>(usage);
         
         // Create icosahedron
         float t = (1.0f + std::sqrt(5.0f)) / 2.0f;
@@ -198,7 +271,12 @@ public:
             if (v.normal.lengthSquared() > 0.001f)
                 v.normal = v.normal.normalized();
         }
+        
+        markDirty(); // Normals changed
     }
 };
+
+// Initialize static mesh ID counter
+std::atomic<uint64_t> Mesh::nextMeshID{0};
 
 #endif //MESH_H

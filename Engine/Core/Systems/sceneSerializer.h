@@ -1,7 +1,3 @@
-//
-// Scene Serialization - Save and load scenes to/from files
-//
-
 #ifndef ENGINE_SCENE_SERIALIZER_H
 #define ENGINE_SCENE_SERIALIZER_H
 

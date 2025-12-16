@@ -768,27 +768,18 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/cameraComponent.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/monoBehaviour.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Systems/input.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/EngineAPI.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Assets/Scripts/cameraController.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Assets/Scripts/rotator.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/default_shaders.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
-  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/rasterizer.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/window.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/textureLoader.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
@@ -799,6 +790,19 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec2.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/default_shaders.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/render_command.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/render_types.h \
+  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/uniform_buffer.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h \
   /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h \
@@ -959,21 +963,13 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
 
 /opt/homebrew/Cellar/sdl2/2.32.10/include/SDL2/SDL.h:
 
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/textureLoader.h:
-
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/modelLoader.h:
 
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_window.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_n.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_renderer.h:
-
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/gameEngine.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/minmax.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Systems/sceneSerializer.h:
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/monoBehaviour.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_function.h:
 
@@ -985,7 +981,23 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
 
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/component.h:
 
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/render_types.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h:
+
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/builtin_materials.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/replace.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/locale.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_set_symmetric_difference.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/textureLoader.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_fill.h:
 
@@ -997,21 +1009,7 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
 
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/replace.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/locale.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_set_symmetric_difference.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h:
-
 /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Assets/Scripts/cameraController.h:
-
-/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/monoBehaviour.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/fill.h:
 
@@ -1383,6 +1381,8 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_volatile.h:
 
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/uniform_buffer.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_useconds_t.h:
 
 /opt/homebrew/Cellar/sdl2/2.32.10/include/SDL2/SDL_audio.h:
@@ -1738,6 +1738,10 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/front_insert_iterator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/erase_if_container.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Systems/sceneSerializer.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/minmax.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/istreambuf_iterator.h:
 
@@ -2331,6 +2335,10 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_all_extents.h:
 
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/opengl_renderer.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_n.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unique.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition_copy.h:
@@ -2590,6 +2598,10 @@ CMakeFiles/ModelTest.dir/Demos/model_test.cpp.o: /Users/pranavsukesh/Documents/G
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/__wctype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_limits.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/EngineAPI.h:
+
+/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/render_command.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path.h:
 

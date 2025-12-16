@@ -40,9 +40,9 @@ public:
         const char* vertexShader = R"(
             #version 410 core
             layout (location = 0) in vec3 aPos;
-            layout (location = 1) in vec3 aNormal;
-            layout (location = 2) in vec3 aColor;
-            layout (location = 3) in vec2 aTexCoord;
+            layout (location = 1) in vec2 aNormalPacked;
+            layout (location = 2) in vec2 aTexCoord;
+            layout (location = 3) in vec4 aColor;
             
             out vec3 FragPos;
             out vec3 Normal;
@@ -53,11 +53,36 @@ public:
             uniform mat4 view;
             uniform mat4 projection;
             
+            // Unpack octahedron normal
+            vec3 unpackNormal(vec2 packed)
+            {
+                vec3 n;
+                n.z = 1.0 - abs(packed.x) - abs(packed.y);
+                
+                if (n.z < 0.0)
+                {
+                    float signX = packed.x >= 0.0 ? 1.0 : -1.0;
+                    float signY = packed.y >= 0.0 ? 1.0 : -1.0;
+                    float oldX = packed.x;
+                    n.x = (1.0 - abs(packed.y)) * signX;
+                    n.y = (1.0 - abs(oldX)) * signY;
+                }
+                else
+                {
+                    n.x = packed.x;
+                    n.y = packed.y;
+                }
+                
+                return normalize(n);
+            }
+            
             void main()
             {
                 FragPos = vec3(model * vec4(aPos, 1.0));
-                Normal = mat3(transpose(inverse(model))) * aNormal;
-                VertexColor = aColor;
+                vec3 localNormal = unpackNormal(aNormalPacked);
+                // Use mat3(model) which works for uniform scaling and identity transforms
+                Normal = normalize(mat3(model) * localNormal);
+                VertexColor = aColor.rgb;
                 TexCoord = aTexCoord;
                 gl_Position = projection * view * vec4(FragPos, 1.0);
             }
@@ -156,9 +181,12 @@ public:
                 
                 vec3 N = normalize(Normal);
                 if (_UseBumpMap) {
-                    // Simple normal mapping (proper TBN would be better)
+                    // Simple normal mapping - improved for flat surfaces
                     vec3 normalMap = texture(_BumpMap, TexCoord).rgb * 2.0 - 1.0;
-                    N = normalize(N + normalMap * _BumpScale);
+                    // For flat surfaces, apply bump more carefully to avoid artifacts
+                    // Mix in the bump perturbation more subtly
+                    vec3 bumpPerturbation = normalMap * _BumpScale * 0.1; // Scale down the effect
+                    N = normalize(N + bumpPerturbation);
                 }
                 
                 float ao = 1.0;
@@ -241,9 +269,9 @@ public:
         const char* vertexShader = R"(
             #version 410 core
             layout (location = 0) in vec3 aPos;
-            layout (location = 1) in vec3 aNormal;
-            layout (location = 2) in vec3 aColor;
-            layout (location = 3) in vec2 aTexCoord;
+            layout (location = 1) in vec2 aNormalPacked;
+            layout (location = 2) in vec2 aTexCoord;
+            layout (location = 3) in vec4 aColor;
             
             out vec3 VertexColor;
             out vec2 TexCoord;
@@ -254,7 +282,7 @@ public:
             
             void main()
             {
-                VertexColor = aColor;
+                VertexColor = aColor.rgb;
                 TexCoord = aTexCoord;
                 gl_Position = projection * view * model * vec4(aPos, 1.0);
             }
@@ -311,9 +339,9 @@ public:
         const char* vertexShader = R"(
             #version 410 core
             layout (location = 0) in vec3 aPos;
-            layout (location = 1) in vec3 aNormal;
-            layout (location = 2) in vec3 aColor;
-            layout (location = 3) in vec2 aTexCoord;
+            layout (location = 1) in vec2 aNormalPacked;
+            layout (location = 2) in vec2 aTexCoord;
+            layout (location = 3) in vec4 aColor;
             
             out vec3 FragPos;
             out vec3 Normal;
@@ -324,11 +352,36 @@ public:
             uniform mat4 view;
             uniform mat4 projection;
             
+            // Unpack octahedron normal
+            vec3 unpackNormal(vec2 packed)
+            {
+                vec3 n;
+                n.z = 1.0 - abs(packed.x) - abs(packed.y);
+                
+                if (n.z < 0.0)
+                {
+                    float signX = packed.x >= 0.0 ? 1.0 : -1.0;
+                    float signY = packed.y >= 0.0 ? 1.0 : -1.0;
+                    float oldX = packed.x;
+                    n.x = (1.0 - abs(packed.y)) * signX;
+                    n.y = (1.0 - abs(oldX)) * signY;
+                }
+                else
+                {
+                    n.x = packed.x;
+                    n.y = packed.y;
+                }
+                
+                return normalize(n);
+            }
+            
             void main()
             {
                 FragPos = vec3(model * vec4(aPos, 1.0));
-                Normal = mat3(transpose(inverse(model))) * aNormal;
-                VertexColor = aColor;
+                vec3 localNormal = unpackNormal(aNormalPacked);
+                // Use mat3(model) for normal transformation
+                Normal = normalize(mat3(model) * localNormal);
+                VertexColor = aColor.rgb;
                 TexCoord = aTexCoord;
                 gl_Position = projection * view * vec4(FragPos, 1.0);
             }

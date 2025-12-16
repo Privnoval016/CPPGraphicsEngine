@@ -9,72 +9,118 @@
 namespace DefaultShaders
 {
     /**
-     * Basic Blinn-Phong Vertex Shader
-     * Transforms vertices and passes data to fragment shader
+     * Optimized Blinn-Phong Vertex Shader with UBOs
+     * Supports packed vertex format and uniform buffers
      */
     const char* BLINN_PHONG_VERTEX = R"(
 #version 330 core
 
-// Input vertex attributes
-layout (location = 0) in vec3 aPos;       // Vertex position
-layout (location = 1) in vec3 aNormal;    // Vertex normal
-layout (location = 2) in vec3 aColor;     // Vertex color
+// Input vertex attributes (packed format)
+layout (location = 0) in vec3 aPos;        // Position (vec3)
+layout (location = 1) in vec2 aNormalPacked; // Packed normal (octahedron)
+layout (location = 2) in vec2 aTexCoord;   // UV (half float)
+layout (location = 3) in vec4 aColor;      // Color (4x uint8 normalized)
+
+// Camera UBO (shared across all draws)
+layout (std140) uniform CameraData
+{
+    mat4 view;
+    mat4 projection;
+    mat4 viewProjection;
+    vec3 cameraPosition;
+};
+
+// Per-object uniforms (still needed)
+uniform mat4 model;
 
 // Output to fragment shader
 out vec3 FragPos;      // World-space position
 out vec3 Normal;       // World-space normal
-out vec3 VertexColor;  // Interpolated vertex color
+out vec2 TexCoord;     // Texture coordinates
+out vec4 VertexColor;  // Interpolated vertex color
 
-// Transformation matrices
-uniform mat4 model;       // Model matrix (local to world)
-uniform mat4 view;        // View matrix (world to camera)
-uniform mat4 projection;  // Projection matrix (camera to clip space)
+// Unpack octahedron normal
+vec3 unpackNormal(vec2 packed)
+{
+    vec3 n;
+    n.z = 1.0 - abs(packed.x) - abs(packed.y);
+    
+    if (n.z < 0.0)
+    {
+        float signX = packed.x >= 0.0 ? 1.0 : -1.0;
+        float signY = packed.y >= 0.0 ? 1.0 : -1.0;
+        float oldX = packed.x;
+        n.x = (1.0 - abs(packed.y)) * signX;
+        n.y = (1.0 - abs(oldX)) * signY;
+    }
+    else
+    {
+        n.x = packed.x;
+        n.y = packed.y;
+    }
+    
+    return normalize(n);
+}
 
 void main()
 {
     // Transform position to world space
     FragPos = vec3(model * vec4(aPos, 1.0));
     
-    // Transform normal to world space (using normal matrix)
-    Normal = mat3(transpose(inverse(model))) * aNormal;
+    // Unpack and transform normal to world space
+    vec3 localNormal = unpackNormal(aNormalPacked);
+    Normal = mat3(transpose(inverse(model))) * localNormal;
     
-    // Pass through vertex color
+    // Pass through texture coordinates and color
+    TexCoord = aTexCoord;
     VertexColor = aColor;
     
-    // Final position in clip space
-    gl_Position = projection * view * vec4(FragPos, 1.0);
+    // Final position in clip space (using UBO)
+    gl_Position = viewProjection * vec4(FragPos, 1.0);
 }
 )";
 
     /**
-     * Blinn-Phong Fragment Shader
-     * Implements ambient + diffuse + specular lighting
-     * Supports up to 8 lights (directional or point)
+     * Optimized Blinn-Phong Fragment Shader with UBOs
+     * Uses uniform buffers for light data
      */
     const char* BLINN_PHONG_FRAGMENT = R"(
 #version 330 core
 
 // Input from vertex shader
-in vec3 FragPos;      // World-space fragment position
-in vec3 Normal;       // World-space normal
-in vec3 VertexColor;  // Interpolated vertex color
+in vec3 FragPos;
+in vec3 Normal;
+in vec2 TexCoord;
+in vec4 VertexColor;
 
 // Output color
 out vec4 FragColor;
 
-// Light structure
+// Light structure (std140 layout)
 struct Light {
-    int type;         // 0 = directional, 1 = point
-    vec3 position;    // Position (for point lights)
-    vec3 direction;   // Direction (for directional lights)
-    vec3 color;       // Light color
-    float intensity;  // Light intensity multiplier
+    vec3 position;
+    int type;
+    vec3 direction;
+    float intensity;
+    vec3 color;
+    float _pad0;
 };
 
-// Uniforms
-uniform vec3 viewPos;           // Camera position
-uniform Light lights[8];        // Array of lights
-uniform int numLights;          // Number of active lights
+// Lights UBO (shared across all draws)
+layout (std140) uniform LightData
+{
+    Light lights[8];
+    int numLights;
+};
+
+// Camera UBO (for view position)
+layout (std140) uniform CameraData
+{
+    mat4 view;
+    mat4 projection;
+    mat4 viewProjection;
+    vec3 cameraPosition;
+};
 
 // Material properties (could be made uniform for customization)
 const float ambientStrength = 0.1;
@@ -84,10 +130,10 @@ const float shininess = 32.0;
 void main()
 {
     vec3 norm = normalize(Normal);
-    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 viewDir = normalize(cameraPosition - FragPos);
     
-    // Ambient lighting (constant base light)
-    vec3 ambient = ambientStrength * VertexColor;
+    // Ambient lighting
+    vec3 ambient = ambientStrength * VertexColor.rgb;
     
     // Accumulate diffuse and specular from all lights
     vec3 diffuse = vec3(0.0);
@@ -113,12 +159,12 @@ void main()
         }
         
         // Diffuse lighting (Lambert's cosine law)
-        float diff = max(dot(norm,  lightDir), 0.0);
-        diffuse += lights[i].color * lights[i].intensity * diff * attenuation * VertexColor;
+        float diff = max(dot(norm, lightDir), 0.0);
+        diffuse += lights[i].color * lights[i].intensity * diff * attenuation * VertexColor.rgb;
         
         // Specular lighting (Blinn-Phong)
         vec3 halfDir = normalize(lightDir + viewDir);
-        float spec = pow(max(dot(norm,  halfDir), 0.0), shininess);
+        float spec = pow(max(dot(norm, halfDir), 0.0), shininess);
         specular += lights[i].color * lights[i].intensity * spec * attenuation * specularStrength;
     }
     
@@ -133,24 +179,33 @@ void main()
 )";
 
     /**
-     * Unlit Vertex Shader
+     * Unlit Vertex Shader (optimized with UBOs)
      * Simple vertex transformation without lighting
      */
     const char* UNLIT_VERTEX = R"(
 #version 330 core
 layout (location = 0) in vec3 aPos;
-layout (location = 2) in vec3 aColor;
+layout (location = 1) in vec2 aNormalPacked;
+layout (location = 2) in vec2 aTexCoord;
+layout (location = 3) in vec4 aColor;
 
-out vec3 VertexColor;
+out vec4 VertexColor;
+
+// Camera UBO
+layout (std140) uniform CameraData
+{
+    mat4 view;
+    mat4 projection;
+    mat4 viewProjection;
+    vec3 cameraPosition;
+};
 
 uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
 
 void main()
 {
     VertexColor = aColor;
-    gl_Position = projection * view * model * vec4(aPos, 1.0);
+    gl_Position = viewProjection * model * vec4(aPos, 1.0);
 }
 )";
 
@@ -160,12 +215,12 @@ void main()
      */
     const char* UNLIT_FRAGMENT = R"(
 #version 330 core
-in vec3 VertexColor;
+in vec4 VertexColor;
 out vec4 FragColor;
 
 void main()
 {
-    FragColor = vec4(VertexColor, 1.0);
+    FragColor = VertexColor;
 }
 )";
 

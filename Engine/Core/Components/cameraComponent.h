@@ -1,7 +1,3 @@
-//
-// Camera Component - Handles camera view and projection
-//
-
 #ifndef ENGINE_CAMERA_COMPONENT_H
 #define ENGINE_CAMERA_COMPONENT_H
 

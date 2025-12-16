@@ -1,6 +1,7 @@
 //
-// Graphics Engine - Single header for users
-// Include this to use the engine
+// Graphics Engine - Complete header for main application files
+// Use this in main.cpp and demo files that need to set up and run the engine
+// For user-written scripts (MonoBehaviour), use EngineAPI.h instead
 //
 
 #ifndef GRAPHICS_ENGINE_H

@@ -1,7 +1,3 @@
-//
-// OpenGL Window - Hardware-accelerated window with OpenGL context
-//
-
 #ifndef OPENGL_WINDOW_H
 #define OPENGL_WINDOW_H
 
@@ -16,6 +12,13 @@
 #include <GL/glew.h>
 #endif
 
+/**
+ * @class OpenGLWindow
+ * @brief Manages an SDL2 window with an OpenGL context
+ * 
+ * Handles window creation, OpenGL context setup, event polling,
+ * and buffer swapping for rendering.
+ */
 class OpenGLWindow
 {
 public:
@@ -26,6 +29,12 @@ public:
     int height;
     bool isOpen;
 
+    /**
+     * @brief Construct a new OpenGLWindow object
+     * @param w Width of the window
+     * @param h Height of the window
+     * @param title Title of the window
+     */
     OpenGLWindow(int w, int h, const std::string& title = "CPP Graphics Engine - OpenGL")
         : window(nullptr),
           glContext(nullptr),
@@ -104,11 +113,17 @@ public:
         std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     }
 
+    /**
+     * @brief Destroy the OpenGLWindow object
+     */
     ~OpenGLWindow()
     {
         close();
     }
 
+    /**
+     * @brief Close the window and clean up resources
+     */
     void close()
     {
         if (glContext)
@@ -125,13 +140,19 @@ public:
         isOpen = false;
     }
 
+    /**
+     * @brief Swap the front and back buffers
+     */
     void swapBuffers()
     {
         if (!isOpen) return;
         SDL_GL_SwapWindow(window);
     }
 
-    // Poll for window events
+    /**
+     * @brief Poll for window events
+     * @return false if the window should close
+     */
     bool pollEvents()
     {
         SDL_Event event;
@@ -163,6 +184,10 @@ public:
         return true;
     }
 
+    /**
+     * @brief Set the window title
+     * @param title New title string
+     */
     void setTitle(const std::string& title)
     {
         if (window)

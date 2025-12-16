@@ -769,27 +769,18 @@ CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdarg.h
  /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stddef.h
  /Library/Developer/CommandLineTools/usr/lib/clang/14.0.3/include/stdint.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/cameraComponent.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Components/monoBehaviour.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Core/Systems/input.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/EngineAPI.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Assets/Scripts/cameraController.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Assets/Scripts/rotator.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/default_shaders.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
- /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/rasterizer.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/window.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Loaders/textureLoader.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
@@ -800,6 +791,19 @@ CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.o
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec2.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/mat4.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Math/vec3.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Materials/material.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/default_shaders.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Shaders/shader.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/light.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/framebuffer.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/render_command.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/render_types.h
+ /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Core/uniform_buffer.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/color.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/Primitives/mesh.h
  /Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Engine/Rendering/camera.h

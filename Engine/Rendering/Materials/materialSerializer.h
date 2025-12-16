@@ -3,6 +3,7 @@
 
 #include "material.h"
 #include "builtin_materials.h"
+#include "../Loaders/textureLoader.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -21,12 +22,14 @@
  * - float: name value
  * - int: name value
  * - vec3: name x y z
+ * - texture: name filepath
  * 
  * Example:
  * materialType: Standard
  * color: _Color 1.0 0.0 0.0
  * float: _Metallic 0.8
  * float: _Smoothness 0.9
+ * texture: _MainTex Assets/Textures/diffuse.png
  * 
  * Custom material types can be registered using registerMaterialType()
  */
@@ -128,6 +131,16 @@ public:
                 file << "vec3: " << name << " " 
                      << value.x << " " << value.y << " " << value.z << "\n";
             }
+            file << "\n";
+        }
+
+        // Write all texture properties
+        const auto& texturePaths = material.getTexturePaths();
+        if (!texturePaths.empty()) {
+            file << "# Texture Properties\n";
+            for (const auto& [name, path] : texturePaths) {
+                file << "texture: " << name << " " << path << "\n";
+            }
         }
 
         file.close();
@@ -206,6 +219,18 @@ public:
                     float x, y, z;
                     iss >> name >> x >> y >> z;
                     material->setVector(name, vec3(x, y, z));
+                }
+                else if (key == "texture:") {
+                    std::string name, filepath;
+                    iss >> name >> filepath;
+                    
+                    // Load texture from file
+                    auto texture = TextureLoader::loadFromFile(filepath);
+                    if (texture) {
+                        material->setTexture(name, texture, filepath);
+                    } else {
+                        std::cerr << "Failed to load texture: " << filepath << std::endl;
+                    }
                 }
                 else {
                     std::cerr << "Unknown property type: " << key << std::endl;

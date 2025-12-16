@@ -1,8 +1,3 @@
-//
-// MonoBehaviour - Base class for user-written scripts
-// Unity architecture: Component -> Behaviour -> MonoBehaviour
-//
-
 #ifndef ENGINE_MONOBEHAVIOUR_H
 #define ENGINE_MONOBEHAVIOUR_H
 
@@ -42,8 +37,6 @@ public:
     void update(float deltaTime) override {}
     void lateUpdate(float deltaTime) override {}
     void onDestroy() override {}
-
-    // ===== Transform Access =====
     
     /**
      * @brief Quick access to transform component

@@ -10,9 +10,12 @@
 #include <string>
 #include <iostream>
 
-// STB Image implementation
+// STB Image - only include implementation once with guard
+#ifndef STB_IMAGE_IMPLEMENTATION_INCLUDED
+#define STB_IMAGE_IMPLEMENTATION_INCLUDED
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#endif
 
 /**
  * @class TextureLoader

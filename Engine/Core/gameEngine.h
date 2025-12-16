@@ -1,7 +1,3 @@
-//
-// Created by Graphics Engine
-//
-
 #ifndef GAME_ENGINE_H
 #define GAME_ENGINE_H
 
@@ -15,6 +11,14 @@
 #include <memory>
 #include <thread>
 
+/**
+ * @class GameEngine
+ * @brief Main game engine class that manages the game loop, scenes, and rendering
+ * 
+ * The GameEngine class is responsible for initializing the engine, managing the active scene,
+ * running the game loop, handling window events, and rendering frames. It supports both
+ * fixed timestep and interactive rendering modes.
+ */
 class GameEngine
 {
 public:
@@ -35,6 +39,12 @@ public:
     std::unique_ptr<Window> window;
     bool useWindow;
 
+    /**
+     * @brief Constructor for GameEngine
+     * @param w Width of the framebuffer/window
+     * @param h Height of the framebuffer/window
+     * @param createWindow Whether to create an SDL window for interactive rendering
+     */
     GameEngine(int w = 800, int h = 600, bool createWindow = false)
         : width(w),
           height(h),
@@ -58,6 +68,10 @@ public:
         }
     }
 
+    /**
+     * @brief Set the active scene for the engine
+     * @param scene Pointer to the Scene to set as active
+     */
     void setActiveScene(Scene* scene)
     {
         activeScene = scene;
@@ -67,6 +81,10 @@ public:
         }
     }
 
+    /**
+     * @brief Initialize the engine and active scene
+     * This calls the awake and start methods of the active scene
+     */
     void initialize()
     {
         if (activeScene)
@@ -76,6 +94,10 @@ public:
         }
     }
 
+    /**
+     * @brief Run a single frame of the engine
+     * This updates the active scene and renders a frame
+     */
     void runFrame()
     {
         if (!activeScene || !running)
@@ -92,6 +114,11 @@ public:
         time += deltaTime;
     }
 
+    /**
+     * @brief Run the engine for a fixed number of frames with a fixed timestep
+     * @param numFrames Number of frames to run
+     * @param fixedDeltaTime Fixed delta time for each frame
+     */
     void run(int numFrames = 1, float fixedDeltaTime = 1.0f / 60.0f)
     {
         running = true;
@@ -105,6 +132,10 @@ public:
         }
     }
 
+    /**
+     * @brief Run the engine in interactive mode with a window
+     * This starts the main loop, handling window events and rendering frames
+     */
     void runInteractive()
     {
         if (!activeScene)
@@ -178,22 +209,36 @@ public:
         std::cout << "Average FPS: " << (frameCount / time) << std::endl;
     }
 
+    /**
+     * @brief Stop the engine's main loop
+     */
     void stop()
     {
         running = false;
     }
 
+    /**
+     * @brief Save the current framebuffer to a PPM file
+     * @param filename Name of the file to save the framebuffer
+     */
     void saveFrame(const std::string& filename)
     {
         framebuffer.saveToPPM(filename);
     }
 
+    /**
+     * @brief Output the current framebuffer to the console
+     */
     void outputFrame()
     {
         framebuffer.outputToConsole();
     }
 
-    // Resize the framebuffer
+    /**
+     * @brief Resize the framebuffer and update the active scene's camera aspect ratio
+     * @param newWidth New width of the framebuffer/window
+     * @param newHeight New height of the framebuffer/window
+     */
     void resize(int newWidth, int newHeight)
     {
         width = newWidth;

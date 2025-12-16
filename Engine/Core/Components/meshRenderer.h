@@ -1,7 +1,3 @@
-//
-// MeshRenderer Component - Renders mesh with material (Unity-like)
-//
-
 #ifndef MESHRENDERER_H
 #define MESHRENDERER_H
 
@@ -14,7 +10,7 @@
  * @class MeshRenderer
  * @brief Component that renders a mesh with a material
  * 
- * Works together with MeshFilter component (like Unity).
+ * Works together with MeshFilter component.
  * Holds material reference and rendering settings.
  */
 class MeshRenderer : public Component

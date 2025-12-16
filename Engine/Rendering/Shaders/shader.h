@@ -65,17 +65,18 @@ private:
     }
 
     /**
-     * Get uniform location with caching
+     * Get uniform location with caching (avoids string hashing)
      * @param name Uniform variable name in shader
-     * @return OpenGL uniform location
+     * @return OpenGL uniform location (-1 if not found)
      */
     GLint getUniformLocation(const std::string& name)
     {
-        if (uniformCache.find(name) != uniformCache.end())
-            return uniformCache[name];
+        auto it = uniformCache.find(name);
+        if (it != uniformCache.end())
+            return it->second;
         
         GLint location = glGetUniformLocation(programID, name.c_str());
-        // Don't warn about missing uniforms - shaders may not use all uniforms
+        // Cache even -1 locations to avoid repeated lookups
         uniformCache[name] = location;
         return location;
     }
@@ -91,6 +92,30 @@ public:
         if (programID != 0)
         {
             glDeleteProgram(programID);
+        }
+    }
+    
+    /**
+     * Get uniform block index (for UBOs)
+     * @param name Uniform block name
+     * @return Block index or GL_INVALID_INDEX
+     */
+    GLuint getUniformBlockIndex(const std::string& name)
+    {
+        return glGetUniformBlockIndex(programID, name.c_str());
+    }
+    
+    /**
+     * Bind uniform block to binding point
+     * @param blockName Uniform block name in shader
+     * @param bindingPoint UBO binding point
+     */
+    void bindUniformBlock(const std::string& blockName, GLuint bindingPoint)
+    {
+        GLuint blockIndex = getUniformBlockIndex(blockName);
+        if (blockIndex != GL_INVALID_INDEX)
+        {
+            glUniformBlockBinding(programID, blockIndex, bindingPoint);
         }
     }
 
