@@ -19,4 +19,4 @@ int: _UseMainTex 1
 # Texture Properties
 texture: _BumpMap Assets/Textures/Ground/GroundDisplacement.png
 texture: _MetallicGlossMap Assets/Textures/Ground/GroundSpecular.png
-texture: _MainTex Assets/Textures/Ground/GroundDiffuse.jpg
+texture: _MainTex Assets/Textures/AmongUs.png

@@ -159,29 +159,50 @@ int main()
             // Ground material - PBR with textures
             auto groundMat = BuiltinMaterials::createStandard();
             
-            // Load ground textures with path tracking
-            std::string diffusePath = "Assets/Textures/Ground/GroundDiffuse.jpg";
+            // Load ground textures with automatic resizing
+            // This is the proper game engine approach: all textures in a material
+            // are automatically resized to match dimensions for consistency
+            std::string diffusePath = "Assets/Textures/AmongUs.png";
             std::string specularPath = "Assets/Textures/Ground/GroundSpecular.png";
             std::string displacementPath = "Assets/Textures/Ground/GroundDisplacement.png";
             
+            // Load diffuse texture first (reference size)
             auto groundDiffuse = TextureLoader::loadFromFile(diffusePath);
-            auto groundSpecular = TextureLoader::loadFromFile(specularPath);
-            auto groundDisplacement = TextureLoader::loadFromFile(displacementPath);
             
             if (groundDiffuse) {
                 groundMat->setTexture("_MainTex", groundDiffuse, diffusePath);
-                // Flag is set automatically by setTexture()
-            }
-            if (groundSpecular) {
-                // Use specular map as metallic/smoothness map
-                groundMat->setTexture("_MetallicGlossMap", groundSpecular, specularPath);
-                // Flag is set automatically by setTexture()
-            }
-            if (groundDisplacement) {
-                // Use displacement as bump/normal map
-                groundMat->setTexture("_BumpMap", groundDisplacement, displacementPath);
-                groundMat->setFloat("_BumpScale", 0.3f);
-                // Flag is set automatically by setTexture()
+                
+                // Get the reference dimensions from diffuse texture
+                int refWidth = groundDiffuse->getWidth();
+                int refHeight = groundDiffuse->getHeight();
+                
+                // Load other textures with automatic resizing to match diffuse dimensions
+                // This prevents segfaults from mismatched texture sizes
+                auto groundSpecular = TextureLoader::loadFromFile(specularPath, refWidth, refHeight);
+                auto groundDisplacement = TextureLoader::loadFromFile(displacementPath, refWidth, refHeight);
+                
+                if (groundSpecular) {
+                    // Use specular map as metallic/smoothness map
+                    groundMat->setTexture("_MetallicGlossMap", groundSpecular, specularPath);
+                }
+                
+                if (groundDisplacement) {
+                    // Use displacement as bump/normal map
+                    groundMat->setTexture("_BumpMap", groundDisplacement, displacementPath);
+                    groundMat->setFloat("_BumpScale", 0.3f);
+                }
+            } else {
+                // Fallback: try loading without reference size
+                auto groundSpecular = TextureLoader::loadFromFile(specularPath);
+                auto groundDisplacement = TextureLoader::loadFromFile(displacementPath);
+                
+                if (groundSpecular) {
+                    groundMat->setTexture("_MetallicGlossMap", groundSpecular, specularPath);
+                }
+                if (groundDisplacement) {
+                    groundMat->setTexture("_BumpMap", groundDisplacement, displacementPath);
+                    groundMat->setFloat("_BumpScale", 0.3f);
+                }
             }
             
             groundMat->setName("Ground");
