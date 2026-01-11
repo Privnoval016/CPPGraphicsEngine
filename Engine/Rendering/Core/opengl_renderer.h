@@ -414,10 +414,22 @@ public:
     {
         // Update camera UBO
         auto& camData = cameraUBO->get();
-        camData.view = camera.getViewMatrix();
-        camData.projection = camera.getProjectionMatrix();
-        camData.viewProjection = camData.projection * camData.view;
+        // Transpose matrices for OpenGL column-major layout
+        camData.view = camera.getViewMatrix().transpose();
+        camData.projection = camera.getProjectionMatrix().transpose();
+        camData.viewProjection = (camData.projection.transpose() * camData.view.transpose()).transpose();
         camData.position = camera.position;
+        
+        // Debug: Print projection matrix first time
+        static bool printed = false;
+        if (!printed) {
+            std::cout << "Projection matrix [0][0]: " << camera.getProjectionMatrix().m[0][0] << std::endl;
+            std::cout << "Projection matrix [1][1]: " << camera.getProjectionMatrix().m[1][1] << std::endl;
+            std::cout << "Camera FOV: " << camera.fieldOfView << " radians (" << (camera.fieldOfView * 180.0f / 3.14159f) << " degrees)" << std::endl;
+            std::cout << "Camera aspect: " << camera.aspectRatio << std::endl;
+            printed = true;
+        }
+        
         cameraUBO->upload();
         
         // Update lights UBO

@@ -105,10 +105,20 @@ public:
 
         isOpen = true;
         
-        // Set initial viewport
-        glViewport(0, 0, width, height);
+        // Get actual drawable size (important for Retina/HiDPI displays)
+        int drawableWidth, drawableHeight;
+        SDL_GL_GetDrawableSize(window, &drawableWidth, &drawableHeight);
+        
+        // Set viewport to drawable size
+        glViewport(0, 0, drawableWidth, drawableHeight);
+        
+        // Check what OpenGL actually set
+        GLint viewport[4];
+        glGetIntegerv(GL_VIEWPORT, viewport);
         
         std::cout << "OpenGL Window created: " << width << "x" << height << std::endl;
+        std::cout << "Drawable size: " << drawableWidth << "x" << drawableHeight << std::endl;
+        std::cout << "GL Viewport: " << viewport[0] << "," << viewport[1] << " " << viewport[2] << "x" << viewport[3] << std::endl;
         std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
         std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     }
@@ -177,7 +187,11 @@ public:
                 {
                     width = event.window.data1;
                     height = event.window.data2;
-                    glViewport(0, 0, width, height);
+                    // Use drawable size for viewport
+                    int drawableWidth, drawableHeight;
+                    SDL_GL_GetDrawableSize(window, &drawableWidth, &drawableHeight);
+                    glViewport(0, 0, drawableWidth, drawableHeight);
+                    std::cout << "Window resized to: " << width << "x" << height << " (drawable: " << drawableWidth << "x" << drawableHeight << ")" << std::endl;
                 }
             }
         }

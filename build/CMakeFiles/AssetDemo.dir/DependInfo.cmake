@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/pranavsukesh/Documents/GitHub/CPPGraphicsEngine/Demos/asset_demo.cpp" "CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.o" "gcc" "CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.o.d"
+  "/Users/pranavsukesh/Desktop/Github/CPPGraphicsEngine/Demos/asset_demo.cpp" "CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.o" "gcc" "CMakeFiles/AssetDemo.dir/Demos/asset_demo.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
