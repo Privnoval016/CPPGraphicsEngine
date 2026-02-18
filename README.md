@@ -40,7 +40,7 @@ make Game
 ./Game
 ```
 
-## Project Structure (Unity-like)
+## Project Structure
 
 ```
 CPPGraphicsEngine/
@@ -61,7 +61,7 @@ CPPGraphicsEngine/
 
 ## Architecture
 
-### Component Hierarchy (Unity-style)
+### Component Hierarchy
 
 ```
 Component                    # Base - can attach to GameObject
@@ -171,7 +171,7 @@ vec3::up, vec3::forward, vec3::right
 ✅ Built-in primitives (cube, sphere, plane)  
 ✅ Blinn-Phong lighting  
 ✅ Input system (keyboard + mouse)  
-✅ Simple entry point (like Unity scenes)  
+✅ Simple entry points
 
 ## Controls (Demo)
 
@@ -235,7 +235,3 @@ See `Docs/` folder for detailed guides:
 ## License
 
 MIT License - See LICENSE file
-
----
-
-**Happy game dev! 🎮**
