@@ -162,16 +162,16 @@ vec3::up, vec3::forward, vec3::right
 
 ## Features
 
-✅ Hardware-accelerated OpenGL rendering (60+ FPS)  
-✅ Unity-like component system (Component → Behaviour → MonoBehaviour)  
-✅ Parent-child transform hierarchies  
-✅ Camera component system  
-✅ Scene save/load (.scene files)  
-✅ Custom shader support  
-✅ Built-in primitives (cube, sphere, plane)  
-✅ Blinn-Phong lighting  
-✅ Input system (keyboard + mouse)  
-✅ Simple entry points
+Hardware-accelerated OpenGL rendering (60+ FPS)  
+Unity-like component system (Component → Behaviour → MonoBehaviour)  
+Parent-child transform hierarchies  
+Camera component system  
+Scene save/load (.scene files)  
+Custom shader support  
+Built-in primitives (cube, sphere, plane)  
+Blinn-Phong lighting  
+Input system (keyboard + mouse)  
+Simple entry points
 
 ## Controls (Demo)
 
